@@ -9,7 +9,7 @@
         <span class="badge badge-vip" style="margin-bottom: 0.75rem; font-size: 0.82rem; padding: 0.35rem 0.85rem;">
             👑 LANGGANAN DULUR WASGITEL
         </span>
-        <h1 style="font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 0.75rem;">
+        <h1 style="font-size: 2.8rem; font-weight: 900; color: var(--text-main); margin-bottom: 0.75rem;">
             Pilih Paket VIP & Dukung Sineas Tegal
         </h1>
         <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.6;">
@@ -19,16 +19,16 @@
 
     <!-- Active Subscription Banner if user is active VIP -->
     @if(Auth::check() && Auth::user()->hasVipAccess())
-    <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(6, 182, 212, 0.15)); border: 2px solid var(--gold-500); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+    <div style="background: linear-gradient(135deg, var(--gold-50), var(--green-50)); border: 1px solid var(--gold-500); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; box-shadow: var(--shadow-sm);">
         <div>
-            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--gold-400); font-weight: 800; font-size: 0.9rem; margin-bottom: 0.35rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--gold-700); font-weight: 800; font-size: 0.9rem; margin-bottom: 0.35rem;">
                 <span>👑</span> STATUS LANGGANAN AKTIF
             </div>
-            <div style="font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 0.25rem;">
+            <div style="font-size: 1.6rem; font-weight: 900; color: var(--text-main); margin-bottom: 0.25rem;">
                 {{ Auth::user()->vip_plan ?? 'Paket VIP Aktif' }}
             </div>
-            <div style="color: #cbd5e1; font-size: 0.9rem;">
-                Aktif nganti: <strong style="color: var(--cyan-400);">{{ Auth::user()->vip_expires_at ? Auth::user()->vip_expires_at->format('d F Y, H:i') : 'Permanen' }}</strong>
+            <div style="color: var(--text-muted); font-size: 0.9rem;">
+                Aktif nganti: <strong style="color: var(--green-700);">{{ Auth::user()->vip_expires_at ? Auth::user()->vip_expires_at->format('d F Y, H:i') : 'Permanen' }}</strong>
             </div>
         </div>
         <div style="display: flex; gap: 1rem;">

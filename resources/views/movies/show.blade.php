@@ -73,33 +73,33 @@
     </div>
 
     <!-- Content Columns -->
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; margin-bottom: 3.5rem;">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 3.5rem;">
         <!-- Left: Synopsis & Info -->
         <div>
-            <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem;">
-                <h3 style="font-size: 1.3rem; color: #fff; margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">
+            <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
                     📖 Sinopsis & Latar Budaya
                 </h3>
-                <p style="font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 1.5rem;">
+                <p style="font-size: 1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1.5rem;">
                     {{ $movie->synopsis }}
                 </p>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; background: rgba(0,0,0,0.25); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; background: var(--bg-hover); padding: 1.25rem; border-radius: 12px; border: 1px solid var(--border-color);">
                     <div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Sutradara</div>
-                        <div style="font-size: 0.95rem; font-weight: 700; color: #fff;">{{ $movie->director }}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Sutradara</div>
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);">{{ $movie->director }}</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Paraga (Pemeran)</div>
-                        <div style="font-size: 0.95rem; font-weight: 700; color: #fff;">{{ $movie->cast ?? 'Seniman Teater Tegal' }}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Paraga (Pemeran)</div>
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);">{{ $movie->cast ?? 'Seniman Teater Tegal' }}</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Kategori Seni</div>
-                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--gold-400);">{{ $movie->category->name }}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Kategori Seni</div>
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--primary);">{{ $movie->category->name }}</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Total Penonton</div>
-                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--cyan-400);">{{ number_format($movie->views_count) }} kali</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Total Penonton</div>
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--accent);">{{ number_format($movie->views_count) }} kali</div>
                     </div>
                 </div>
             </div>
@@ -107,18 +107,18 @@
 
         <!-- Right: Access Status & Ticket Box -->
         <div>
-            <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.75rem;">
-                <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-sm);">
+                <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                     <span>🛡️</span> Status Akses Panjenengan
                 </h4>
 
                 @if($accessCheck['allowed'])
-                    <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.25rem;">
+                    <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.25rem;">
                         <div style="font-size: 2rem; margin-bottom: 0.35rem;">🎉</div>
-                        <div style="font-weight: 700; color: var(--emerald-500); font-size: 1rem; margin-bottom: 0.2rem;">
+                        <div style="font-weight: 800; color: #166534; font-size: 1rem; margin-bottom: 0.2rem;">
                             Akses Mbukak & Siap Ditonton!
                         </div>
-                        <div style="font-size: 0.82rem; color: #cbd5e1;">
+                        <div style="font-size: 0.85rem; color: #15803D;">
                             @if($movie->access_type === 'free')
                                 Film kiye gratis disetel nggo kabeh pamiarsa.
                             @elseif($hasTicket)
@@ -133,15 +133,15 @@
                         ▶ Putar Film Saiki
                     </a>
                 @elseif($movie->access_type === 'ticket')
-                    <div style="background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.35); border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.25rem;">
+                    <div style="background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.25rem;">
                         <div style="font-size: 2rem; margin-bottom: 0.35rem;">🎟️</div>
-                        <div style="font-weight: 700; color: #fda4af; font-size: 1rem; margin-bottom: 0.2rem;">
+                        <div style="font-weight: 800; color: #9F1239; font-size: 1rem; margin-bottom: 0.2rem;">
                             Butuh Tiket Bioskop Rakyat
                         </div>
-                        <div style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 0.75rem;">
+                        <div style="font-size: 0.85rem; color: #BE123C; margin-bottom: 0.75rem;">
                             Film premiere eksklusif. Tuku tiket sapisan, aktif 7 dina.
                         </div>
-                        <div style="font-size: 1.6rem; font-weight: 900; color: #fff;">
+                        <div style="font-size: 1.6rem; font-weight: 900; color: #E11D48;">
                             {{ $movie->formatted_price }}
                         </div>
                     </div>
@@ -150,12 +150,12 @@
                         🎟️ Tuku Tiket Nonton Saiki
                     </button>
                 @else
-                    <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.25rem;">
+                    <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.25rem;">
                         <div style="font-size: 2rem; margin-bottom: 0.35rem;">👑</div>
-                        <div style="font-weight: 700; color: var(--gold-400); font-size: 1rem; margin-bottom: 0.2rem;">
+                        <div style="font-weight: 800; color: #92400E; font-size: 1rem; margin-bottom: 0.2rem;">
                             Khusus Anggota VIP Sebayu
                         </div>
-                        <div style="font-size: 0.82rem; color: #cbd5e1;">
+                        <div style="font-size: 0.85rem; color: #B45309;">
                             Langganan VIP nggo mbukak film kiye sarta puluhan rekaman langka liyane.
                         </div>
                     </div>
@@ -210,52 +210,52 @@
         <button class="modal-close">✕</button>
         <div style="text-align: center; margin-bottom: 1.5rem;">
             <div style="font-size: 2.2rem; margin-bottom: 0.35rem;">🎟️</div>
-            <h3 style="font-size: 1.35rem; color: #fff;">Tuku Tiket Premiere</h3>
+            <h3 style="font-size: 1.35rem; color: var(--text-main); font-weight: 800;">Tuku Tiket Premiere</h3>
             <p style="color: var(--text-muted); font-size: 0.88rem;">{{ $movie->title }}</p>
         </div>
 
         <form method="POST" action="{{ route('movies.buy-ticket', $movie->id) }}">
             @csrf
             
-            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <div style="background: var(--bg-hover); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.9rem;">
                     <span style="color: var(--text-muted);">Biaya Tiket Bioskop</span>
-                    <span style="font-weight: 700; color: #fff;">{{ $movie->formatted_price }}</span>
+                    <span style="font-weight: 800; color: #E11D48;">{{ $movie->formatted_price }}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.9rem;">
                     <span style="color: var(--text-muted);">Masa Berlaku Nonton</span>
-                    <span style="color: var(--cyan-400); font-weight: 600;">7 Dina (Bebas Replay)</span>
+                    <span style="color: var(--primary); font-weight: 700;">7 Dina (Bebas Replay)</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; border-top: 1px dashed var(--border-subtle); padding-top: 0.6rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; border-top: 1px dashed var(--border-color); padding-top: 0.6rem;">
                     <span style="color: var(--text-muted);">Saldo Dompet Bahari Sampeyan</span>
-                    <span style="font-weight: 700; color: var(--gold-400);">
+                    <span style="font-weight: 800; color: var(--accent);">
                         Rp {{ number_format(Auth::user()->wallet_balance ?? 0, 0, ',', '.') }}
                     </span>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Pilih Cara Pembayaran:</label>
+                <label class="form-label" style="font-weight: 700;">Pilih Cara Pembayaran:</label>
                 <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-                    <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                    <label style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-hover); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 8px; cursor: pointer;">
                         <input type="radio" name="payment_method" value="dompet_bahari" checked>
                         <div>
-                            <div style="font-weight: 700; color: #fff; font-size: 0.9rem;">💰 Dompet Bahari (Instan 1-Klik)</div>
-                            <div style="font-size: 0.78rem; color: var(--text-dim);">Dipotong langsung saka saldo akun sampeyan</div>
+                            <div style="font-weight: 700; color: var(--text-main); font-size: 0.9rem;">💰 Dompet Bahari (Instan 1-Klik)</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted);">Dipotong langsung saka saldo akun sampeyan</div>
                         </div>
                     </label>
-                    <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                    <label style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-hover); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 8px; cursor: pointer;">
                         <input type="radio" name="payment_method" value="qris">
                         <div>
-                            <div style="font-weight: 700; color: #fff; font-size: 0.9rem;">📱 QRIS (GoPay, OVO, ShopeePay, Dana)</div>
-                            <div style="font-size: 0.78rem; color: var(--text-dim);">Simulasi pembayaran QRIS instan</div>
+                            <div style="font-weight: 700; color: var(--text-main); font-size: 0.9rem;">📱 QRIS (GoPay, OVO, ShopeePay, Dana)</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted);">Simulasi pembayaran QRIS instan</div>
                         </div>
                     </label>
-                    <label style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                    <label style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-hover); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 8px; cursor: pointer;">
                         <input type="radio" name="payment_method" value="va_bca">
                         <div>
-                            <div style="font-weight: 700; color: #fff; font-size: 0.9rem;">🏦 Virtual Account Bank (BCA / BRI / Mandiri)</div>
-                            <div style="font-size: 0.78rem; color: var(--text-dim);">Transfer bank otomatis</div>
+                            <div style="font-weight: 700; color: var(--text-main); font-size: 0.9rem;">🏦 Virtual Account Bank (BCA / BRI / Mandiri)</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted);">Transfer bank otomatis</div>
                         </div>
                     </label>
                 </div>

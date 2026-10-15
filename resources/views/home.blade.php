@@ -57,31 +57,31 @@
 
     <!-- Highlight Stats Bar (Budaya Tegal) -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3.5rem;">
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
-            <div style="font-size: 2rem; background: rgba(245, 158, 11, 0.15); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold-400);">🎬</div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.75rem; background: var(--gold-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold-600); border: 1px solid var(--gold-100);">🎬</div>
             <div>
-                <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">{{ $trendingMovies->count() }}+ Sinema</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">{{ $trendingMovies->count() }}+ Sinema</div>
                 <div style="font-size: 0.8rem; color: var(--text-dim);">Film & Dokumenter Tegalan</div>
             </div>
         </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
-            <div style="font-size: 2rem; background: rgba(6, 182, 212, 0.15); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--cyan-400);">🎵</div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.75rem; background: var(--cyan-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--cyan-600); border: 1px solid var(--cyan-100);">🎵</div>
             <div>
-                <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">{{ $featuredTracks->count() }}+ Tembang</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">{{ $featuredTracks->count() }}+ Tembang</div>
                 <div style="font-size: 0.8rem; color: var(--text-dim);">Musik & Pop Pantura</div>
             </div>
         </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
-            <div style="font-size: 2rem; background: rgba(244, 63, 94, 0.15); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--crimson-500);">🎟️</div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.75rem; background: var(--rose-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--rose-600); border: 1px solid var(--rose-100);">🎟️</div>
             <div>
-                <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">Bioskop Rakyat</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">Bioskop Rakyat</div>
                 <div style="font-size: 0.8rem; color: var(--text-dim);">Sistem Tiket Premiere</div>
             </div>
         </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem;">
-            <div style="font-size: 2rem; background: rgba(16, 185, 129, 0.15); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--emerald-500);">☕</div>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.75rem; background: var(--green-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--green-600); border: 1px solid var(--green-100);">☕</div>
             <div>
-                <div style="font-size: 1.4rem; font-weight: 800; color: #fff;">Wasgitel VIP</div>
+                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">Wasgitel VIP</div>
                 <div style="font-size: 0.8rem; color: var(--text-dim);">Akses Tanpa Batas</div>
             </div>
         </div>
@@ -289,14 +289,14 @@
         </div>
     </section>
 
-    <!-- Banner Ajakan Langganan VIP -->
-    <section style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(6, 182, 212, 0.1)); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: var(--radius-lg); padding: 3rem; margin: 3rem 0; position: relative; overflow: hidden;">
+    <!-- Banner Ajakan Langganan VIP (Halobun Minimalist Style) -->
+    <section style="background: linear-gradient(135deg, var(--green-50), var(--gold-50)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 3rem; margin: 3rem 0; position: relative; overflow: hidden; box-shadow: var(--shadow-sm);">
         <div style="max-width: 650px;">
             <span class="badge badge-vip" style="margin-bottom: 1rem;">👑 DADI ANGGOTA VIP DULUR SEBAYU</span>
-            <h2 style="font-size: 2.2rem; color: #fff; margin-bottom: 0.8rem;">
+            <h2 style="font-size: 2.2rem; color: var(--text-main); margin-bottom: 0.8rem;">
                 Dukung Sineas & Budaya Asli Tegal Laka-Laka!
             </h2>
-            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem;">
+            <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem;">
                 Kanthi langganan VIP mulai saka Rp 29.000/wulan, sampeyan oleh akses bebas nonton kabeh film eksklusif, dokumenter sejarah peninggalan Ki Gede Sebayu, rekaman wayang langka, lan lagu-lagu tanpa iklan.
             </p>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">

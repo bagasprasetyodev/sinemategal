@@ -6,7 +6,7 @@
 <div class="container" style="padding-top: 2rem;">
     <!-- Catalog Header -->
     <div style="margin-bottom: 2rem;">
-        <h1 style="font-size: 2.4rem; color: #fff; margin-bottom: 0.5rem;">
+        <h1 style="font-size: 2.4rem; color: var(--text-main); margin-bottom: 0.5rem;">
             🎬 Katalog Sinema & Film Tegalan
         </h1>
         <p style="color: var(--text-muted); font-size: 1rem;">
@@ -97,7 +97,7 @@
     @else
         <div style="text-align: center; padding: 4rem 1.5rem; background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
             <div style="font-size: 3rem; margin-bottom: 1rem;">🎬</div>
-            <h3 style="font-size: 1.3rem; color: #fff; margin-bottom: 0.5rem;">Ora Ana Film Kang Cocog</h3>
+            <h3 style="font-size: 1.3rem; color: var(--text-main); margin-bottom: 0.5rem;">Ora Ana Film Kang Cocog</h3>
             <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
                 Coba ganti tembung kunci pencarian utawa atur maneh saringan kategori.
             </p>

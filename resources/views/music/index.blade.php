@@ -4,19 +4,19 @@
 
 @section('content')
 <div class="container" style="padding-top: 2rem;">
-    <!-- Music Header Banner (Spotify Style) -->
-    <div style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(245, 158, 11, 0.15)), #0f172a; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 3rem 2.5rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+    <!-- Music Header Banner (Halobun Minimalist Style) -->
+    <div style="background: linear-gradient(135deg, var(--green-50), var(--cyan-50)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 3rem 2.5rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; box-shadow: var(--shadow-sm);">
         <div style="max-width: 650px;">
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <span class="brand-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--cyan-400); border-color: rgba(6, 182, 212, 0.4);">
+                <span class="brand-badge" style="background: var(--green-100); color: var(--green-700); border-color: rgba(22, 163, 74, 0.4);">
                     NADA TEGALAN
                 </span>
                 <span style="font-size: 0.85rem; color: var(--text-dim);">Spotify & YouTube Music Pesisiran</span>
             </div>
-            <h1 style="font-size: 2.6rem; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 0.75rem;">
+            <h1 style="font-size: 2.6rem; font-weight: 900; color: var(--text-main); line-height: 1.15; margin-bottom: 0.75rem;">
                 Tembang & Gending <span class="text-gold">Tegal Laka-Laka</span>
             </h1>
-            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
                 Rungokna lagu-lagu legendaris alm. Ki Enthus Susmono, Imam Joend, campursari ngapak, lan tembang mistis Sintren. Player ngisor layar bakal tetep muter sanajan sampeyan mbukak kaca liyane!
             </p>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -25,13 +25,13 @@
                         <span>▶️</span> Putar Lagu Populer
                     </button>
                 @endif
-                <a href="{{ route('subscriptions.index') }}" class="btn btn-outline-gold btn-lg">
+                <a href="{{ route('subscriptions.index') }}" class="btn btn-secondary btn-lg">
                     <span>👑</span> Upgrade VIP Audio Hi-Fi
                 </a>
             </div>
         </div>
 
-        <div style="width: 220px; height: 220px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg), 0 0 30px var(--cyan-glow); border: 2px solid rgba(6, 182, 212, 0.4); flex-shrink: 0;">
+        <div style="width: 200px; height: 200px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); border: 2px solid var(--border-subtle); flex-shrink: 0;">
             <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="Music Cover" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
     </div>
@@ -49,15 +49,15 @@
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
             @foreach($playlists as $pl)
-                <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; box-shadow: var(--shadow-xs); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden;">
                         <img src="{{ $pl->cover_url }}" alt="{{ $pl->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                         <button onclick="window.playPlaylist({{ $pl->id }})" class="movie-play-btn" style="opacity: 1;" title="Putar Playlist">
                             ▶
                         </button>
                     </div>
                     <div>
-                        <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.35rem;">{{ $pl->title }}</h3>
+                        <h3 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.35rem;">{{ $pl->title }}</h3>
                         <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.5;">{{ $pl->description }}</p>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted);">

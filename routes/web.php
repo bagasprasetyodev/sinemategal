@@ -48,7 +48,12 @@ Route::post('/wallet/topup', [WalletController::class, 'topup'])->name('wallet.t
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/movies', [AdminController::class, 'storeMovie'])->name('admin.movies.store');
+    Route::put('/movies/{id}', [AdminController::class, 'updateMovie'])->name('admin.movies.update');
     Route::delete('/movies/{id}', [AdminController::class, 'destroyMovie'])->name('admin.movies.destroy');
     Route::post('/tracks', [AdminController::class, 'storeTrack'])->name('admin.tracks.store');
+    Route::put('/tracks/{id}', [AdminController::class, 'updateTrack'])->name('admin.tracks.update');
     Route::delete('/tracks/{id}', [AdminController::class, 'destroyTrack'])->name('admin.tracks.destroy');
+    Route::post('/users/{id}/toggle-vip', [AdminController::class, 'toggleUserVip'])->name('admin.users.toggle-vip');
+    Route::post('/users/{id}/add-balance', [AdminController::class, 'addUserBalance'])->name('admin.users.add-balance');
+    Route::post('/users/{id}/change-role', [AdminController::class, 'updateUserRole'])->name('admin.users.change-role');
 });

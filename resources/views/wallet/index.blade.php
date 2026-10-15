@@ -6,13 +6,13 @@
 <div class="container" style="padding-top: 2rem;">
     <!-- Wallet Header & Balance Card -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap;">
-        <!-- Left: Balance Card -->
-        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(6, 182, 212, 0.2)), #0f172a; border: 2px solid var(--gold-500); border-radius: var(--radius-lg); padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-lg), 0 0 30px var(--gold-glow);">
+        <!-- Left: Balance Card (Halobun Minimalist Style) -->
+        <div style="background: linear-gradient(135deg, var(--green-50), var(--gold-50)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                     <div style="display: flex; align-items: center; gap: 0.5rem;">
                         <span style="font-size: 1.5rem;">💰</span>
-                        <span style="font-size: 1rem; font-weight: 800; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;">
+                        <span style="font-size: 1rem; font-weight: 800; color: var(--text-main); letter-spacing: 0.05em; text-transform: uppercase;">
                             DOMPET BAHARI
                         </span>
                     </div>
@@ -22,28 +22,28 @@
                 <div style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.35rem;">
                     Total Saldo Aktif Sampeyan:
                 </div>
-                <div style="font-size: 3rem; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 0.5rem;">
-                    <span style="font-size: 1.5rem; color: var(--gold-400); vertical-align: super;">Rp</span>
+                <div style="font-size: 3rem; font-weight: 900; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem;">
+                    <span style="font-size: 1.5rem; color: var(--green-600); vertical-align: super;">Rp</span>
                     {{ number_format($user->wallet_balance, 0, ',', '.') }}
                 </div>
-                <div style="font-size: 0.82rem; color: #cbd5e1;">
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
                     Bisa digunakake nggo tuku tiket premiere lan mbayar langganan VIP Sebayu saknalika.
                 </div>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.25rem; margin-top: 1.5rem;">
-                <div style="font-size: 0.82rem; color: var(--text-dim);">
-                    Akun: <strong style="color: #fff;">{{ $user->name }}</strong>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem; margin-top: 1.5rem;">
+                <div style="font-size: 0.85rem; color: var(--text-dim);">
+                    Akun: <strong style="color: var(--text-main);">{{ $user->name }}</strong>
                 </div>
-                <div style="font-size: 0.82rem; color: var(--gold-400);">
+                <div style="font-size: 0.82rem; font-weight: 700; color: var(--gold-700);">
                     {{ $user->hasVipAccess() ? '⭐ Anggota VIP' : 'Warga Reguler' }}
                 </div>
             </div>
         </div>
 
         <!-- Right: Top-up Form -->
-        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem;">
-            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-sm);">
+            <h3 style="font-size: 1.25rem; color: var(--text-main); font-weight: 800; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
                 <span>⚡</span> Isi Ulang / Top-Up Saldo
             </h3>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">
@@ -83,8 +83,8 @@
     </div>
 
     <!-- Transaction History Table -->
-    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3.5rem;">
-        <h3 style="font-size: 1.3rem; color: #fff; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.3rem; color: var(--text-main); font-weight: 800; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
             <span>📜</span> Riwayat Transaksi Dompet Bahari
         </h3>
 
