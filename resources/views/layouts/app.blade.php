@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     
-    <!-- Vanilla CSS Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- Vanilla CSS Stylesheet (Root Relative to prevent HTTPS Mixed Content) -->
+    <link rel="stylesheet" href="/css/app.css">
     @yield('styles')
 </head>
 <body>
@@ -293,8 +293,8 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/audio-player.js') }}"></script>
+    <!-- Scripts (Root Relative) -->
+    <script src="/js/audio-player.js"></script>
     @yield('scripts')
 </body>
 </html>
