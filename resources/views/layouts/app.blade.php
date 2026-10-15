@@ -65,11 +65,7 @@
                         </a>
                     </li>
                     @endauth
-                    <li>
-                        <a href="{{ route('admin.dashboard') }}" class="nav-link nav-admin-link {{ request()->routeIs('admin.*') ? 'active' : '' }}" title="Pusat Manajemen Film, Lagu & Pengguna">
-                            Kelola Admin
-                        </a>
-                    </li>
+
                 </ul>
             </nav>
 
