@@ -18,12 +18,12 @@
 </head>
 <body>
 
-    <!-- Demo Persona Bar (Memudahkan Pengujian Fitur Tiket, VIP, & Admin) -->
+    <!-- Demo Persona Bar (Discreet Utility Bar) -->
     <div class="demo-bar">
         <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="color: var(--gold-400); font-weight: 700;">☕ Uji Profil Akun (1-Klik):</span>
-                <span style="color: var(--text-dim); font-size: 0.72rem;">Ganti peran nggo nyoba fitur gratis, VIP, tiket bioskop, utawa kurator admin:</span>
+                <span style="font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem;">Simulasi Peran:</span>
+                <span style="color: var(--text-dim); font-size: 0.72rem;">Pilih profil untuk menguji hak akses konten:</span>
             </div>
             <div class="demo-pills">
                 @php
@@ -34,10 +34,10 @@
                     <a href="{{ route('demo.switch', $du->id) }}" 
                        class="demo-pill {{ $currentUser && $currentUser->id === $du->id ? 'is-active' : '' }}"
                        title="{{ $du->email }}">
-                        @if($du->role === 'admin') 👑 Admin (@if($currentUser && $currentUser->id === $du->id)Aktif @else Ki Patih @endif)
-                        @elseif($du->is_vip) ⭐ VIP (Kang Slamet)
-                        @elseif($du->role === 'creator') 🎬 Kreator (Mas Bowo)
-                        @else 🎟️ Reguler + 1 Tiket (Yu Minah)
+                        @if($du->role === 'admin') Admin (Ki Patih)
+                        @elseif($du->is_vip) VIP (Kang Slamet)
+                        @elseif($du->role === 'creator') Kreator (Mas Bowo)
+                        @else Reguler (Yu Minah)
                         @endif
                     </a>
                 @endforeach
@@ -45,15 +45,19 @@
         </div>
     </div>
 
-    <!-- Navigation Header (Glassmorphic) -->
+    <!-- Navigation Header (Minimalist Modern) -->
     <header class="site-navbar">
         <div class="container nav-container">
             <!-- Brand Logo -->
             <a href="{{ route('home') }}" class="nav-brand">
-                <div class="brand-icon">🎭</div>
-                <div>
-                    SINEMA<span class="text-gold">TEGAL</span>
-                    <span class="brand-badge">Laka-Laka</span>
+                <div class="brand-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <span style="font-weight: 800; color: var(--text-main);">SINEMA</span><span style="font-weight: 800; color: var(--gold-600);">TEGAL</span>
+                    <span class="brand-badge">Platform Budaya</span>
                 </div>
             </a>
 
@@ -62,34 +66,34 @@
                 <ul class="nav-links">
                     <li>
                         <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
-                            <span>Beranda</span>
+                            Beranda
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('movies.index') }}" class="nav-link {{ request()->routeIs('movies.*') ? 'active' : '' }}">
-                            <span>🎬 Sinema & Film</span>
+                            Sinema & Film
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('music.index') }}" class="nav-link {{ request()->routeIs('music.*') ? 'active' : '' }}">
-                            <span>🎵 Nada Tegalan</span>
+                            Nada Tradisi
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('subscriptions.index') }}" class="nav-link {{ request()->routeIs('subscriptions.*') ? 'active' : '' }}">
-                            <span>👑 Langganan VIP</span>
+                            Langganan VIP
                         </a>
                     </li>
                     @auth
                     <li>
                         <a href="{{ route('tickets.mine') }}" class="nav-link {{ request()->routeIs('tickets.*') ? 'active' : '' }}">
-                            <span>🎟️ Tiket Kula</span>
+                            Tiket Saya
                         </a>
                     </li>
                     @endauth
                     <li>
                         <a href="{{ route('admin.dashboard') }}" class="nav-link nav-admin-link {{ request()->routeIs('admin.*') ? 'active' : '' }}" title="Pusat Manajemen Film, Lagu & Pengguna">
-                            <span>⚙️ Kelola Admin</span>
+                            Kelola Admin
                         </a>
                     </li>
                 </ul>
@@ -99,28 +103,28 @@
             <div class="nav-actions">
                 @auth
                     <!-- Dompet Bahari Pill -->
-                    <a href="{{ route('wallet.index') }}" class="user-wallet-badge" title="Saldo Dompet Bahari nggo tuku tiket/VIP">
-                        <span>💰</span>
+                    <a href="{{ route('wallet.index') }}" class="user-wallet-badge" title="Saldo Dompet Bahari">
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">Saldo:</span>
                         <span>Rp {{ number_format(Auth::user()->wallet_balance, 0, ',', '.') }}</span>
                     </a>
 
                     <!-- User Profile Dropdown Pill -->
                     <div class="user-menu-pill">
                         <img src="{{ Auth::user()->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100' }}" alt="Avatar" class="user-avatar">
-                        <span style="font-weight: 700; color: var(--text-main);">{{ Str::limit(Auth::user()->name, 14) }}</span>
+                        <span style="font-weight: 600; color: var(--text-main);">{{ Str::limit(Auth::user()->name, 14) }}</span>
                         @if(Auth::user()->hasVipAccess())
-                            <span class="badge badge-vip" style="padding: 2px 6px; font-size: 0.65rem;">VIP</span>
+                            <span class="badge badge-vip" style="padding: 1px 5px; font-size: 0.6rem;">VIP</span>
                         @endif
-                        <form action="{{ route('logout') }}" method="POST" style="margin-left: 0.4rem;">
+                        <form action="{{ route('logout') }}" method="POST" style="margin-left: 0.25rem;">
                             @csrf
-                            <button type="submit" class="btn btn-secondary btn-sm" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" title="Metu akun">
-                                🚪
+                            <button type="submit" class="btn btn-secondary btn-sm" style="padding: 0.15rem 0.45rem; font-size: 0.72rem;" title="Keluar">
+                                Keluar
                             </button>
                         </form>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-secondary btn-sm">Mlebu</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Daftar Akun</a>
+                    <a href="{{ route('login') }}" class="btn btn-secondary btn-sm">Masuk</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Daftar</a>
                 @endauth
             </div>
         </div>
@@ -217,11 +221,15 @@
             <!-- Center: Controls & Timeline -->
             <div class="player-controls-wrap">
                 <div class="player-buttons">
-                    <button id="playerPrevBtn" class="player-ctrl-btn" title="Lagu Sakdurunge">⏮️</button>
-                    <button id="playerPlayBtn" class="player-play-btn" title="Play/Pause">
+                    <button id="playerPrevBtn" class="player-ctrl-btn" title="Lagu Sebelumnya">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line></svg>
+                    </button>
+                    <button id="playerPlayBtn" class="player-play-btn" title="Putar/Jeda">
                         <span id="playerPlayIcon">&#9654;</span>
                     </button>
-                    <button id="playerNextBtn" class="player-ctrl-btn" title="Lagu Sakbanjure">⏭️</button>
+                    <button id="playerNextBtn" class="player-ctrl-btn" title="Lagu Berikutnya">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line></svg>
+                    </button>
                 </div>
                 <div class="player-timeline">
                     <span id="playerCurrentTime">00:00</span>
@@ -234,11 +242,11 @@
 
             <!-- Right: Extra Actions & Volume -->
             <div class="player-extras">
-                <button id="lyricsToggleBtn" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 0.35rem 0.65rem;">
-                    📜 Lirik Ngapak
+                <button id="lyricsToggleBtn" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 0.25rem 0.65rem;">
+                    Lirik
                 </button>
                 <div class="volume-container">
-                    <span style="font-size: 0.9rem;">🔊</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted);"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                     <input type="range" id="playerVolume" class="volume-slider" min="0" max="100" value="80">
                 </div>
             </div>

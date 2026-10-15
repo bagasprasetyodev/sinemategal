@@ -6,29 +6,29 @@
 <div class="container" style="padding-top: 2rem;">
     <!-- Catalog Header -->
     <div style="margin-bottom: 2rem;">
-        <h1 style="font-size: 2.4rem; color: var(--text-main); margin-bottom: 0.5rem;">
-            🎬 Katalog Sinema & Film Tegalan
+        <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.35rem; letter-spacing: -0.02em;">
+            Katalog Sinema & Film
         </h1>
-        <p style="color: var(--text-muted); font-size: 1rem;">
-            Koleksi film cerita, dokumenter tradisi pesisir, seni Sintren, teater wayang cepak, sarta drama komedi basa Tegal.
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Koleksi film cerita, dokumenter tradisi pesisir, seni Sintren, teater wayang cepak, dan drama komedi khas Tegal.
         </p>
     </div>
 
     <!-- Search & Filter Bar -->
-    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2.5rem;">
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-xs);">
         <form method="GET" action="{{ route('movies.index') }}" style="display: flex; flex-direction: column; gap: 1rem;">
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <input type="text" name="q" value="{{ request('q') }}" class="form-control" style="flex: 1; min-width: 260px;" placeholder="Golek judul film, sutradara, paraga (pemeran), utawa lokasi (Guci, Muarareja)...">
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <input type="text" name="q" value="{{ request('q') }}" class="form-control" style="flex: 1; min-width: 260px;" placeholder="Cari judul film, sutradara, paraga (pemeran), atau latar lokasi...">
                 
-                <select name="access" class="form-control" style="width: auto; min-width: 180px;">
-                    <option value="">Kabeh Tipe Akses</option>
-                    <option value="free" {{ request('access') === 'free' ? 'selected' : '' }}>🟢 Gratis Ditonton</option>
-                    <option value="vip" {{ request('access') === 'vip' ? 'selected' : '' }}>👑 VIP Sebayu</option>
-                    <option value="ticket" {{ request('access') === 'ticket' ? 'selected' : '' }}>🎟️ Tiket Premiere</option>
+                <select name="access" class="form-control" style="width: auto; min-width: 170px;">
+                    <option value="">Semua Tipe Akses</option>
+                    <option value="free" {{ request('access') === 'free' ? 'selected' : '' }}>Gratis</option>
+                    <option value="vip" {{ request('access') === 'vip' ? 'selected' : '' }}>VIP Sebayu</option>
+                    <option value="ticket" {{ request('access') === 'ticket' ? 'selected' : '' }}>Tiket Premiere</option>
                 </select>
 
                 <button type="submit" class="btn btn-primary">
-                    🔍 Saring Film
+                    Cari Film
                 </button>
                 @if(request()->anyFilled(['q', 'category', 'access']))
                     <a href="{{ route('movies.index') }}" class="btn btn-secondary">

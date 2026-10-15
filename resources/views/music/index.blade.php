@@ -4,46 +4,44 @@
 
 @section('content')
 <div class="container" style="padding-top: 2rem;">
-    <!-- Music Header Banner (Halobun Minimalist Style) -->
-    <div style="background: linear-gradient(135deg, var(--green-50), var(--cyan-50)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 3rem 2.5rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; box-shadow: var(--shadow-sm);">
+    <!-- Music Header Banner (Clean Minimalist Showcase) -->
+    <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; box-shadow: var(--shadow-xs);">
         <div style="max-width: 650px;">
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <span class="brand-badge" style="background: var(--green-100); color: var(--green-700); border-color: rgba(22, 163, 74, 0.4);">
-                    NADA TEGALAN
-                </span>
-                <span style="font-size: 0.85rem; color: var(--text-dim);">Spotify & YouTube Music Pesisiran</span>
+                <span class="badge badge-vip">NADA TRADISI</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Arsip Audio Digital Pantura</span>
             </div>
-            <h1 style="font-size: 2.6rem; font-weight: 900; color: var(--text-main); line-height: 1.15; margin-bottom: 0.75rem;">
-                Tembang & Gending <span class="text-gold">Tegal Laka-Laka</span>
+            <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 0.75rem; letter-spacing: -0.02em;">
+                Tembang & Gending Tradisi Pantura
             </h1>
-            <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-                Rungokna lagu-lagu legendaris alm. Ki Enthus Susmono, Imam Joend, campursari ngapak, lan tembang mistis Sintren. Player ngisor layar bakal tetep muter sanajan sampeyan mbukak kaca liyane!
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                Dengarkan rekaman tembang legendaris alm. Ki Enthus Susmono, campursari ngapak, dan gending mistis tari Sintren. Pemutar audio mengambang di bawah akan terus memutar musik meskipun Anda berpindah halaman.
             </p>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                 @if($tracks->first())
                     <button onclick="window.playTrackById({{ $tracks->first()->id }})" class="btn btn-primary btn-lg">
-                        <span>▶️</span> Putar Lagu Populer
+                        Putar Lagu Populer
                     </button>
                 @endif
                 <a href="{{ route('subscriptions.index') }}" class="btn btn-secondary btn-lg">
-                    <span>👑</span> Upgrade VIP Audio Hi-Fi
+                    Upgrade Audio VIP
                 </a>
             </div>
         </div>
 
-        <div style="width: 200px; height: 200px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md); border: 2px solid var(--border-subtle); flex-shrink: 0;">
+        <div style="width: 180px; height: 180px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-subtle); flex-shrink: 0; box-shadow: var(--shadow-xs);">
             <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="Music Cover" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
     </div>
 
-    <!-- Playlists Section (Spotify Style Carousels) -->
-    <div style="margin-bottom: 3.5rem;">
+    <!-- Playlists Section -->
+    <div style="margin-bottom: 3rem;">
         <div class="section-header">
             <div>
                 <h2 class="section-title">
-                    <span>📻</span> Playlist Pilihan Dulur Wasgitel
+                    Daftar Putar Pilihan
                 </h2>
-                <p class="section-subtitle">Daftar putar kurasi kusus nggo kanca ngeteh poci utawa nyantai sore.</p>
+                <p class="section-subtitle">Daftar putar kurasi untuk menemani waktu santai Anda.</p>
             </div>
         </div>
 

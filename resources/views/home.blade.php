@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <!-- Hero Banner (Netflix Style) -->
+    <!-- Hero Banner (Clean Cinema Marquee) -->
     @if($featuredMovie)
     <section class="hero-banner" style="background-image: url('{{ $featuredMovie->banner_url }}');">
         <div class="hero-overlay"></div>
@@ -13,10 +13,10 @@
                 <span class="badge {{ $featuredMovie->access_badge['class'] }}">
                     {{ $featuredMovie->access_badge['label'] }}
                 </span>
-                <span class="hero-tag">🌟 Rating {{ $featuredMovie->rating }}</span>
-                <span class="hero-tag">⏱️ {{ $featuredMovie->duration_string }}</span>
-                <span class="hero-tag">📍 {{ $featuredMovie->location_tag ?? 'Tegal' }}</span>
-                <span class="hero-tag">📅 {{ $featuredMovie->release_year }}</span>
+                <span class="hero-tag">Rating {{ $featuredMovie->rating }}</span>
+                <span class="hero-tag">{{ $featuredMovie->duration_string }}</span>
+                <span class="hero-tag">{{ $featuredMovie->location_tag ?? 'Tegal' }}</span>
+                <span class="hero-tag">{{ $featuredMovie->release_year }}</span>
             </div>
 
             <h1 class="hero-title">{{ $featuredMovie->title }}</h1>
@@ -35,74 +35,77 @@
 
                 @if($accessCheck['allowed'])
                     <a href="{{ route('movies.watch', $featuredMovie->slug) }}" class="btn btn-primary btn-lg">
-                        <span>▶️</span> Putar Film Saiki
+                        Putar Film Sekarang
                     </a>
                 @elseif($featuredMovie->access_type === 'ticket')
                     <a href="{{ route('movies.show', $featuredMovie->slug) }}" class="btn btn-crimson btn-lg">
-                        <span>🎟️</span> Tuku Tiket Premiere ({{ $featuredMovie->formatted_price }})
+                        Beli Tiket Premiere ({{ $featuredMovie->formatted_price }})
                     </a>
                 @else
                     <a href="{{ route('subscriptions.index') }}" class="btn btn-primary btn-lg">
-                        <span>👑</span> Buka Akses VIP Sebayu
+                        Buka Akses VIP Sebayu
                     </a>
                 @endif
 
                 <a href="{{ route('movies.show', $featuredMovie->slug) }}" class="btn btn-secondary btn-lg">
-                    <span>ℹ️</span> Sinopsis & Informasi
+                    Detail Film & Budaya
                 </a>
             </div>
         </div>
     </section>
     @endif
 
-    <!-- Highlight Stats Bar (Budaya Tegal) -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3.5rem;">
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="font-size: 1.75rem; background: var(--gold-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold-600); border: 1px solid var(--gold-100);">🎬</div>
+    <!-- Highlight Stats Bar (Professional Metrics) -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem;">
+        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+            </div>
             <div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">{{ $trendingMovies->count() }}+ Sinema</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">Film & Dokumenter Tegalan</div>
+                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">{{ $trendingMovies->count() }}+ Judul</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Sinema & Dokumenter</div>
             </div>
         </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="font-size: 1.75rem; background: var(--cyan-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--cyan-600); border: 1px solid var(--cyan-100);">🎵</div>
+        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            </div>
             <div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">{{ $featuredTracks->count() }}+ Tembang</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">Musik & Pop Pantura</div>
+                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">{{ $featuredTracks->count() }}+ Lagu</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Arsip Nada Pantura</div>
             </div>
         </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="font-size: 1.75rem; background: var(--rose-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--rose-600); border: 1px solid var(--rose-100);">🎟️</div>
+        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            </div>
             <div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">Bioskop Rakyat</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">Sistem Tiket Premiere</div>
+                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">Pay-Per-View</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Tiket Bioskop Mandiri</div>
             </div>
         </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="font-size: 1.75rem; background: var(--green-50); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--green-600); border: 1px solid var(--green-100);">☕</div>
+        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
+            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            </div>
             <div>
-                <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);">Wasgitel VIP</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">Akses Tanpa Batas</div>
+                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">Wasgitel VIP</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Akses Arsip Lengkap</div>
             </div>
         </div>
     </div>
 
-    <!-- Showcase Marquee Banner (Ala CGV Arthouse Bioskop) -->
-    <section style="margin-bottom: 3.5rem; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-lg);">
-        <img src="/images/banner-arthouse.jpg" alt="Sinema Tegal Arthouse Marquee" style="width: 100%; height: auto; display: block; border-radius: var(--radius-lg);">
-    </section>
-
-    <!-- Section 1: Film Bioskop Rakyat (Sistem Tiket Pay-Per-View ala Explore Movies) -->
+    <!-- Section 1: Film Bioskop Rakyat (Sistem Tiket Premiere) -->
     <section class="section">
         <div class="section-header">
             <div>
-                <div style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--crimson-500); letter-spacing: 0.05em; margin-bottom: 0.2rem;">
-                    SELEKSI PREMIERE TERPOPULER
+                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--rose-600); letter-spacing: 0.05em; margin-bottom: 0.2rem;">
+                    SELEKSI PREMIERE
                 </div>
                 <h2 class="section-title">
-                    <span>🎟️</span> Bioskop Rakyat & Tiket Premiere
+                    Bioskop Rakyat & Tiket Premiere
                 </h2>
-                <p class="section-subtitle">Tonton karya premiere sineas Tegal nganggo sistem tiket mandiri (Pay-Per-View).</p>
+                <p class="section-subtitle">Tonton karya premiere sineas Tegal dengan tiket mandiri (Pay-Per-View).</p>
             </div>
             <a href="{{ route('movies.index', ['access' => 'ticket']) }}" class="view-all-link">
                 Daftar Tiket Film →
@@ -114,16 +117,13 @@
                 <div class="movie-card">
                     <div class="movie-poster-wrap">
                         <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="movie-poster" loading="lazy">
-                        <!-- CGV-style Rank Badge (1, 2, 3...) -->
-                        <div style="position: absolute; top: 0.75rem; left: 0.75rem; width: 32px; height: 32px; background: #e11d48; color: #fff; font-weight: 900; font-size: 1.1rem; border-radius: 8px; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.5);">
+                        <div style="position: absolute; top: 0.75rem; left: 0.75rem; width: 28px; height: 28px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; z-index: 3;">
                             {{ $loop->iteration }}
                         </div>
-                        <div class="movie-badge-top" style="left: 3.2rem;">
-                            <span class="badge badge-ticket">TIKET {{ $movie->formatted_price }}</span>
+                        <div class="movie-badge-top" style="left: 3rem;">
+                            <span class="badge badge-ticket">{{ $movie->formatted_price }}</span>
                         </div>
-                        <div class="movie-rating">
-                            ★ {{ $movie->rating }}
-                        </div>
+                        <div class="movie-rating">★ {{ $movie->rating }}</div>
                         <div class="movie-card-overlay"></div>
                         <a href="{{ route('movies.show', $movie->slug) }}" class="movie-play-btn" title="Nonton Film">
                             ▶
@@ -140,7 +140,7 @@
                         </div>
                         @if($movie->location_tag)
                             <div class="movie-location">
-                                <span>📍</span> {{ $movie->location_tag }}
+                                {{ $movie->location_tag }}
                             </div>
                         @endif
                     </div>
@@ -149,20 +149,20 @@
         </div>
     </section>
 
-    <!-- Section 2: Nada Tegalan (Spotify / YouTube Music Player Section) -->
-    <section class="section" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(8, 12, 20, 0.8)); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem;">
-        <div class="section-header">
+    <!-- Section 2: Nada Tegalan (Clean Minimalist Audio Showcase) -->
+    <section class="section" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem; box-shadow: var(--shadow-xs);">
+        <div class="section-header" style="margin-bottom: 1.25rem;">
             <div>
-                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--gold-400); font-weight: 800; letter-spacing: 0.1em; margin-bottom: 0.2rem;">
-                    SPOTIFY ALA TEGALAN
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--gold-600); font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.2rem;">
+                    ARSIP AUDIO TRADISI
                 </div>
                 <h2 class="section-title">
-                    <span>🎵</span> Nada Tegalan & Tembang Populer
+                    Nada Tradisi & Tembang Pantura
                 </h2>
-                <p class="section-subtitle">Rungokna lagu-lagu khas Tegal, pop Ngapak, campursari, lan gending mistik Sintren langsung ning browser!</p>
+                <p class="section-subtitle">Dengarkan gending Sintren, pop Ngapak, dan campursari pesisir langsung di browser.</p>
             </div>
-            <a href="{{ route('music.index') }}" class="btn btn-outline-gold btn-sm">
-                Buka Player Musik Lengkap →
+            <a href="{{ route('music.index') }}" class="btn btn-secondary btn-sm">
+                Buka Katalog Musik →
             </a>
         </div>
 
@@ -176,15 +176,15 @@
                     <div class="track-card-info">
                         <div class="track-card-title">{{ $track->title }}</div>
                         <div class="track-card-artist">{{ $track->artist }}</div>
-                        <div style="font-size: 0.75rem; color: var(--gold-400); margin-top: 2px;">
+                        <div style="font-size: 0.75rem; color: var(--gold-600); margin-top: 2px;">
                             {{ $track->genre ?? 'Tembang Ngapak' }}
                         </div>
                     </div>
                     <div class="track-card-right">
                         @if($track->access_type === 'vip')
-                            <span class="badge badge-vip" style="font-size: 0.65rem;">VIP</span>
+                            <span class="badge badge-vip">VIP</span>
                         @else
-                            <span class="badge badge-free" style="font-size: 0.65rem;">GRATIS</span>
+                            <span class="badge badge-free">GRATIS</span>
                         @endif
                         <span class="track-card-duration">{{ $track->duration_string }}</span>
                     </div>
@@ -198,12 +198,12 @@
         <div class="section-header">
             <div>
                 <h2 class="section-title">
-                    <span>👑</span> Arsip VIP & Koleksi Wayang Ki Enthus
+                    Arsip VIP & Koleksi Wayang Ki Enthus
                 </h2>
-                <p class="section-subtitle">Dokumenter langka lan pementasan wayang pesisiran kusus anggota langganan VIP Wasgitel.</p>
+                <p class="section-subtitle">Dokumenter langka dan pementasan wayang pesisiran khusus anggota langganan VIP Wasgitel.</p>
             </div>
             <a href="{{ route('movies.index', ['access' => 'vip']) }}" class="view-all-link">
-                Deleng Kabeh VIP →
+                Lihat Koleksi VIP →
             </a>
         </div>
 
@@ -232,7 +232,7 @@
                         </div>
                         @if($movie->location_tag)
                             <div class="movie-location">
-                                <span>📍</span> {{ $movie->location_tag }}
+                                {{ $movie->location_tag }}
                             </div>
                         @endif
                     </div>
@@ -241,17 +241,17 @@
         </div>
     </section>
 
-    <!-- Section 4: Film Komedi & Tontonan Gratis -->
+    <!-- Section 4: Film Komedi & Tontonan Bebas -->
     <section class="section">
         <div class="section-header">
             <div>
                 <h2 class="section-title">
-                    <span>🍿</span> Film Komedi Ngapak & Tontonan Gratis
+                    Koleksi Komedi & Akses Bebas
                 </h2>
-                <p class="section-subtitle">Bisa langsung disetel tanpa biaya, seger lan ngguyu nganti kemekelen!</p>
+                <p class="section-subtitle">Dapat langsung diputar tanpa biaya untuk hiburan budaya khas Tegalan.</p>
             </div>
             <a href="{{ route('movies.index', ['access' => 'free']) }}" class="view-all-link">
-                Koleksi Gratis →
+                Semua Film Bebas →
             </a>
         </div>
 
@@ -280,7 +280,7 @@
                         </div>
                         @if($movie->location_tag)
                             <div class="movie-location">
-                                <span>📍</span> {{ $movie->location_tag }}
+                                {{ $movie->location_tag }}
                             </div>
                         @endif
                     </div>
@@ -289,19 +289,19 @@
         </div>
     </section>
 
-    <!-- Banner Ajakan Langganan VIP (Halobun Minimalist Style) -->
-    <section style="background: linear-gradient(135deg, var(--green-50), var(--gold-50)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 3rem; margin: 3rem 0; position: relative; overflow: hidden; box-shadow: var(--shadow-sm);">
+    <!-- Banner Ajakan Langganan VIP (Professional Minimalist Banner) -->
+    <section style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem; margin: 3rem 0; box-shadow: var(--shadow-xs);">
         <div style="max-width: 650px;">
-            <span class="badge badge-vip" style="margin-bottom: 1rem;">👑 DADI ANGGOTA VIP DULUR SEBAYU</span>
-            <h2 style="font-size: 2.2rem; color: var(--text-main); margin-bottom: 0.8rem;">
-                Dukung Sineas & Budaya Asli Tegal Laka-Laka!
+            <span class="badge badge-vip" style="margin-bottom: 0.75rem;">KEANGGOTAAN VIP WASGITEL</span>
+            <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.65rem; letter-spacing: -0.02em;">
+                Dukung Pelestarian Sinema & Budaya Tegal
             </h2>
-            <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem;">
-                Kanthi langganan VIP mulai saka Rp 29.000/wulan, sampeyan oleh akses bebas nonton kabeh film eksklusif, dokumenter sejarah peninggalan Ki Gede Sebayu, rekaman wayang langka, lan lagu-lagu tanpa iklan.
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                Mulai dari Rp 29.000/bulan untuk akses tanpa batas ke seluruh arsip wayang cepak langka, film dokumenter Ki Gede Sebayu, dan koleksi tembang Pantura kualitas tinggi.
             </p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                 <a href="{{ route('subscriptions.index') }}" class="btn btn-primary btn-lg">
-                    <span>👑</span> Pilih Paket VIP Saiki
+                    Lihat Paket Berlangganan
                 </a>
                 <a href="{{ route('movies.index') }}" class="btn btn-secondary btn-lg">
                     Jelajahi Katalog Film

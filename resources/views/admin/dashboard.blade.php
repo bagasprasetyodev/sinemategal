@@ -25,73 +25,73 @@
             </div>
         </div>
     @else
-        <!-- Admin Header (Halobun Minimalist Style) -->
+        <!-- Admin Header (Clean Minimalist SaaS Style) -->
         <div class="admin-header">
             <div class="admin-title-wrap">
-                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
-                    <span class="badge badge-vip">PUSAT KELOLA ADMIN & KURATOR</span>
-                    <span style="font-size: 0.8rem; color: var(--text-dim);">Budaya, Sineas & Tembang Pantura</span>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                    <span class="badge badge-vip">ADMINISTRATOR & KURATOR</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Sinema & Tembang Pantura</span>
                 </div>
-                <h1>⚙️ Manajemen Sinema Tegal</h1>
-                <p>Pantau performa konten, kelola katalog film & musik, sarta atur transaksi tiket bioskop rakyat.</p>
+                <h1>Pusat Kendali Sinema Tegal</h1>
+                <p>Kelola katalog film budaya, tembang tradisi, transaksi tiket bioskop rakyat, dan status keanggotaan VIP.</p>
             </div>
-            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                 <button type="button" onclick="switchAdminTab('formTab')" class="btn btn-primary btn-sm">
-                    <span>+</span> Tambah Konten Anyar
+                    + Tambah Konten
                 </button>
                 <a href="{{ route('home') }}" class="btn btn-secondary btn-sm">
-                    <span>👁️</span> Pratinjau Web
+                    Lihat Web
                 </a>
             </div>
         </div>
 
         <!-- KPI Stat Cards Grid (Minimalist Cards) -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
             <div class="stat-card">
-                <div class="stat-icon" style="background: var(--gold-50); color: var(--gold-600); border: 1px solid var(--gold-100);">🎬</div>
+                <div class="stat-label">Film & Dokumenter</div>
                 <div class="stat-num">{{ $stats['total_movies'] }}</div>
-                <div class="stat-label">Total Film & Dokumenter</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Katalog Aktif</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: var(--cyan-50); color: var(--cyan-600); border: 1px solid var(--cyan-100);">🎵</div>
+                <div class="stat-label">Tembang Tradisi</div>
                 <div class="stat-num">{{ $stats['total_tracks'] }}</div>
-                <div class="stat-label">Tembang Nada Tegalan</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Tersedia di Audio Player</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: var(--green-50); color: var(--green-600); border: 1px solid var(--green-100);">👑</div>
+                <div class="stat-label">Anggota VIP</div>
                 <div class="stat-num">{{ $stats['active_vips'] }}</div>
-                <div class="stat-label">Pelanggan VIP Wasgitel</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Pelanggan Wasgitel</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: var(--rose-50); color: var(--rose-600); border: 1px solid var(--rose-100);">🎟️</div>
+                <div class="stat-label">Tiket Terjual</div>
                 <div class="stat-num">{{ $stats['tickets_sold'] }}</div>
-                <div class="stat-label">Tiket Terjual (Pay-Per-View)</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Sistem Pay-Per-View</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0;">💰</div>
-                <div class="stat-num" style="font-size: 1.5rem; color: #15803d;">
+                <div class="stat-label">Total Pendapatan</div>
+                <div class="stat-num" style="font-size: 1.45rem;">
                     Rp {{ number_format($stats['ticket_revenue'] + $stats['sub_revenue'], 0, ',', '.') }}
                 </div>
-                <div class="stat-label">Total Pendapatan Budaya</div>
+                <div style="font-size: 0.75rem; color: var(--text-dim);">Tiket & Langganan</div>
             </div>
         </div>
 
         <!-- Segmented Tab Navigation -->
         <div class="admin-tabs">
             <button class="admin-tab-btn active" id="btn-moviesTab" onclick="switchAdminTab('moviesTab')">
-                🎬 Kelola Film ({{ $movies->count() }})
+                Katalog Film ({{ $movies->count() }})
             </button>
             <button class="admin-tab-btn" id="btn-tracksTab" onclick="switchAdminTab('tracksTab')">
-                🎵 Kelola Tembang ({{ $tracks->count() }})
+                Tembang Musik ({{ $tracks->count() }})
             </button>
             <button class="admin-tab-btn" id="btn-ticketsTab" onclick="switchAdminTab('ticketsTab')">
-                🎟️ Riwayat Tiket & Transaksi ({{ $recentTickets->count() }})
+                Transaksi Tiket ({{ $recentTickets->count() }})
             </button>
             <button class="admin-tab-btn" id="btn-usersTab" onclick="switchAdminTab('usersTab')">
-                👥 Kelola Pengguna & VIP ({{ $users->count() }})
+                Pengguna & VIP ({{ $users->count() }})
             </button>
             <button class="admin-tab-btn" id="btn-formTab" onclick="switchAdminTab('formTab')">
-                ➕ Unggah Konten Anyar
+                Tambah Konten
             </button>
         </div>
 
@@ -147,13 +147,13 @@
                                 <span style="font-size: 0.78rem; color: var(--text-dim);">kali tonton</span>
                             </td>
                             <td style="text-align: right;">
-                                <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
-                                    <a href="{{ route('movies.show', $m->slug) }}" class="btn btn-secondary btn-sm" title="Lihat film">👁️</a>
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick='openEditMovieModal(@json($m))' title="Edit data">✏️ Edit</button>
-                                    <form action="{{ route('admin.movies.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Yakin pan mbusak film {{ $m->title }}?');" style="display: inline;">
+                                <div style="display: flex; justify-content: flex-end; gap: 0.35rem;">
+                                    <a href="{{ route('movies.show', $m->slug) }}" class="btn btn-secondary btn-sm" title="Lihat film">Lihat</a>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick='openEditMovieModal(@json($m))' title="Edit data">Edit</button>
+                                    <form action="{{ route('admin.movies.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Hapus film {{ $m->title }}?');" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-secondary btn-sm" style="color: var(--rose-600); border-color: var(--rose-100);" title="Hapus">🗑️</button>
+                                        <button type="submit" class="btn btn-secondary btn-sm" style="color: var(--rose-600);" title="Hapus">Hapus</button>
                                     </form>
                                 </div>
                             </td>
@@ -167,8 +167,8 @@
         <!-- ================= TAB 2: KELOLA TEMBANG ================= -->
         <div id="tracksTab" class="admin-tab-content" style="display: none;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-                <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--text-main);">Daftar Nada & Tembang Pantura</h3>
-                <button onclick="switchAdminTab('formTab')" class="btn btn-primary btn-sm">+ Tambah Tembang Baru</button>
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Daftar Nada & Tembang Pantura</h3>
+                <button onclick="switchAdminTab('formTab')" class="btn btn-primary btn-sm">+ Tambah Tembang</button>
             </div>
 
             <div class="admin-table-container">
@@ -188,38 +188,38 @@
                         <tr>
                             <td>
                                 <div style="display: flex; align-items: center; gap: 0.85rem;">
-                                    <img src="{{ $t->cover_url }}" alt="{{ $t->title }}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; box-shadow: var(--shadow-xs);">
+                                    <img src="{{ $t->cover_url }}" alt="{{ $t->title }}" style="width: 40px; height: 40px; border-radius: 6px; object-fit: cover;">
                                     <div>
-                                        <div style="font-weight: 800; color: var(--text-main); font-size: 0.95rem;">{{ $t->title }}</div>
-                                        <div style="font-size: 0.78rem; color: var(--text-dim);">{{ $t->album ?? 'Single Pantura' }} ({{ $t->release_year }})</div>
+                                        <div style="font-weight: 700; color: var(--text-main); font-size: 0.9rem;">{{ $t->title }}</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted);">{{ $t->album ?? 'Single Pantura' }} ({{ $t->release_year }})</div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <div style="font-weight: 700; color: var(--text-main);">{{ $t->artist }}</div>
+                                <div style="font-weight: 600; color: var(--text-main);">{{ $t->artist }}</div>
                             </td>
                             <td>
                                 <span class="badge badge-neutral">{{ $t->genre ?? 'Pop Ngapak' }}</span>
-                                <span style="font-size: 0.78rem; color: var(--text-dim); margin-left: 0.35rem;">{{ $t->duration_string }}</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: 0.35rem;">{{ $t->duration_string }}</span>
                             </td>
                             <td>
                                 @if($t->access_type === 'vip')
-                                    <span class="badge badge-vip">👑 VIP</span>
+                                    <span class="badge badge-vip">VIP</span>
                                 @else
-                                    <span class="badge badge-free">✨ Gratis</span>
+                                    <span class="badge badge-free">Gratis</span>
                                 @endif
                             </td>
                             <td>
                                 <span style="font-weight: 700; color: var(--text-main);">{{ number_format($t->plays_count, 0, ',', '.') }}</span>
-                                <span style="font-size: 0.78rem; color: var(--text-dim);">kali putar</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">kali putar</span>
                             </td>
                             <td style="text-align: right;">
-                                <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick='openEditTrackModal(@json($t))'>✏️ Edit</button>
-                                    <form action="{{ route('admin.tracks.destroy', $t->id) }}" method="POST" onsubmit="return confirm('Yakin pan mbusak tembang {{ $t->title }}?');" style="display: inline;">
+                                <div style="display: flex; justify-content: flex-end; gap: 0.35rem;">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick='openEditTrackModal(@json($t))'>Edit</button>
+                                    <form action="{{ route('admin.tracks.destroy', $t->id) }}" method="POST" onsubmit="return confirm('Hapus tembang {{ $t->title }}?');" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-secondary btn-sm" style="color: var(--rose-600); border-color: var(--rose-100);">🗑️</button>
+                                        <button type="submit" class="btn btn-secondary btn-sm" style="color: var(--rose-600);">Hapus</button>
                                     </form>
                                 </div>
                             </td>
@@ -336,7 +336,7 @@
                             </td>
                             <td>
                                 @if($u->is_vip)
-                                    <span class="badge badge-vip">⭐ VIP Aktif</span>
+                                    <span class="badge badge-vip">VIP Aktif</span>
                                     <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 2px;">
                                         s/d {{ $u->vip_expires_at ? \Carbon\Carbon::parse($u->vip_expires_at)->format('d M Y') : 'Aktif' }}
                                     </div>
@@ -345,17 +345,17 @@
                                 @endif
                             </td>
                             <td>
-                                <div style="font-weight: 700; color: var(--green-700);">
+                                <div style="font-weight: 600; color: var(--text-main);">
                                     Rp {{ number_format($u->balance, 0, ',', '.') }}
                                 </div>
                             </td>
                             <td style="text-align: right;">
-                                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
                                     <!-- Toggle VIP -->
                                     <form action="{{ route('admin.users.toggle-vip', $u->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         <button type="submit" class="btn btn-secondary btn-sm" style="font-size: 0.75rem;">
-                                            {{ $u->is_vip ? 'Cabut VIP' : '👑 Jadikan VIP' }}
+                                            {{ $u->is_vip ? 'Cabut VIP' : 'Set VIP' }}
                                         </button>
                                     </form>
 
@@ -363,8 +363,8 @@
                                     <form action="{{ route('admin.users.add-balance', $u->id) }}" method="POST" style="display: inline-flex; align-items: center; gap: 0.3rem;">
                                         @csrf
                                         <input type="hidden" name="amount" value="50000">
-                                        <button type="submit" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; color: var(--green-700); border-color: var(--green-100);" title="Tambah saldo Rp 50.000">
-                                            +50rb
+                                        <button type="submit" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; color: var(--accent-emerald);" title="Tambah saldo Rp 50.000">
+                                            + Saldo 50rb
                                         </button>
                                     </form>
                                 </div>
@@ -557,7 +557,7 @@
         <div id="editMovieModal" class="modal-overlay">
             <div class="modal-dialog">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem;">
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main);">✏️ Edit Data Film</h3>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Edit Data Film</h3>
                     <button type="button" onclick="closeEditMovieModal()" style="background: none; border: none; font-size: 1.25rem; color: var(--text-dim); cursor: pointer;">✕</button>
                 </div>
 
@@ -581,9 +581,9 @@
                         <div class="form-group">
                             <label class="form-label">Tipe Akses:</label>
                             <select id="editMovieAccess" name="access_type" class="form-control" required>
-                                <option value="free">✨ Gratis</option>
-                                <option value="vip">👑 VIP</option>
-                                <option value="ticket">🎟️ Tiket Pay-Per-View</option>
+                                <option value="free">Gratis</option>
+                                <option value="vip">VIP</option>
+                                <option value="ticket">Tiket Premiere (Pay-Per-View)</option>
                             </select>
                         </div>
                     </div>
@@ -626,7 +626,7 @@
         <div id="editTrackModal" class="modal-overlay">
             <div class="modal-dialog">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.75rem;">
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main);">✏️ Edit Data Tembang</h3>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Edit Data Tembang</h3>
                     <button type="button" onclick="closeEditTrackModal()" style="background: none; border: none; font-size: 1.25rem; color: var(--text-dim); cursor: pointer;">✕</button>
                 </div>
 
@@ -646,8 +646,8 @@
                         <div class="form-group">
                             <label class="form-label">Akses:</label>
                             <select id="editTrackAccess" name="access_type" class="form-control" required>
-                                <option value="free">✨ Gratis</option>
-                                <option value="vip">👑 VIP</option>
+                                <option value="free">Gratis</option>
+                                <option value="vip">VIP</option>
                             </select>
                         </div>
                     </div>
