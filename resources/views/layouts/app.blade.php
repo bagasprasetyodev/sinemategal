@@ -18,32 +18,6 @@
 </head>
 <body>
 
-    <!-- Demo Persona Bar (Discreet Utility Bar) -->
-    <div class="demo-bar">
-        <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem;">Simulasi Peran:</span>
-                <span style="color: var(--text-dim); font-size: 0.72rem;">Pilih profil untuk menguji hak akses konten:</span>
-            </div>
-            <div class="demo-pills">
-                @php
-                    $demoUsers = \App\Models\User::take(4)->get();
-                    $currentUser = Auth::user();
-                @endphp
-                @foreach($demoUsers as $du)
-                    <a href="{{ route('demo.switch', $du->id) }}" 
-                       class="demo-pill {{ $currentUser && $currentUser->id === $du->id ? 'is-active' : '' }}"
-                       title="{{ $du->email }}">
-                        @if($du->role === 'admin') Admin (Ki Patih)
-                        @elseif($du->is_vip) VIP (Kang Slamet)
-                        @elseif($du->role === 'creator') Kreator (Mas Bowo)
-                        @else Reguler (Yu Minah)
-                        @endif
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
 
     <!-- Navigation Header (Minimalist Modern) -->
     <header class="site-navbar">
