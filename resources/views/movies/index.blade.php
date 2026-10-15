@@ -80,12 +80,9 @@
                             <span>{{ $movie->category->name }}</span>
                             <span>•</span>
                             <span>{{ $movie->duration_string }}</span>
+                            <span>•</span>
+                            <span>{{ $movie->release_year }}</span>
                         </div>
-                        @if($movie->location_tag)
-                            <div class="movie-location">
-                                <span>📍</span> {{ $movie->location_tag }}
-                            </div>
-                        @endif
                     </div>
                 </div>
             @endforeach
@@ -95,14 +92,13 @@
             {{ $movies->links() }}
         </div>
     @else
-        <div style="text-align: center; padding: 4rem 1.5rem; background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">🎬</div>
-            <h3 style="font-size: 1.3rem; color: var(--text-main); margin-bottom: 0.5rem;">Ora Ana Film Kang Cocog</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
-                Coba ganti tembung kunci pencarian utawa atur maneh saringan kategori.
+        <div style="text-align: center; padding: 4rem 1.5rem; background: #ffffff; border-radius: var(--radius-xl); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">Tidak Ada Film yang Ditemukan</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Silakan ubah kata kunci pencarian atau sesuaikan kembali filter kategori akses.
             </p>
-            <a href="{{ route('movies.index') }}" class="btn btn-primary">
-                Deleng Kabeh Film
+            <a href="{{ route('movies.index') }}" class="btn btn-secondary btn-sm">
+                Lihat Semua Katalog
             </a>
         </div>
     @endif

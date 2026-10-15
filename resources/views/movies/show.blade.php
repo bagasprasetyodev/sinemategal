@@ -26,16 +26,21 @@
 
             <!-- Details -->
             <div style="flex: 1; min-width: 300px;">
-                <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.75rem;">
+                <div class="hero-meta-row" style="margin-bottom: 0.75rem;">
                     <span class="badge {{ $movie->access_badge['class'] }}">
                         {{ $movie->access_badge['label'] }}
                     </span>
-                    <span class="hero-tag">Rating {{ $movie->rating }}</span>
-                    <span class="hero-tag">{{ $movie->duration_string }}</span>
-                    <span class="hero-tag">{{ $movie->release_year }}</span>
-                    @if($movie->location_tag)
-                        <span class="hero-tag">{{ $movie->location_tag }}</span>
-                    @endif
+                    <div class="hero-meta-list">
+                        <span>{{ $movie->release_year }}</span>
+                        <span class="meta-dot">•</span>
+                        <span>{{ $movie->duration_string }}</span>
+                        @if($movie->location_tag)
+                            <span class="meta-dot">•</span>
+                            <span>{{ $movie->location_tag }}</span>
+                        @endif
+                        <span class="meta-dot">•</span>
+                        <span class="meta-rating">★ {{ $movie->rating }}</span>
+                    </div>
                 </div>
 
                 <h1 style="font-size: 2.5rem; font-weight: 800; color: #ffffff; line-height: 1.15; margin-bottom: 0.4rem; letter-spacing: -0.02em;">

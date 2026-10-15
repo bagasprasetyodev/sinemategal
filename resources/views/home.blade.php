@@ -9,14 +9,21 @@
     <section class="hero-banner" style="background-image: url('{{ $featuredMovie->banner_url }}');">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-badges">
+            <div class="hero-meta-row">
                 <span class="badge {{ $featuredMovie->access_badge['class'] }}">
                     {{ $featuredMovie->access_badge['label'] }}
                 </span>
-                <span class="hero-tag">Rating {{ $featuredMovie->rating }}</span>
-                <span class="hero-tag">{{ $featuredMovie->duration_string }}</span>
-                <span class="hero-tag">{{ $featuredMovie->location_tag ?? 'Tegal' }}</span>
-                <span class="hero-tag">{{ $featuredMovie->release_year }}</span>
+                <div class="hero-meta-list">
+                    <span>{{ $featuredMovie->release_year }}</span>
+                    <span class="meta-dot">•</span>
+                    <span>{{ $featuredMovie->duration_string }}</span>
+                    @if($featuredMovie->location_tag)
+                        <span class="meta-dot">•</span>
+                        <span>{{ $featuredMovie->location_tag }}</span>
+                    @endif
+                    <span class="meta-dot">•</span>
+                    <span class="meta-rating">★ {{ $featuredMovie->rating }}</span>
+                </div>
             </div>
 
             <h1 class="hero-title">{{ $featuredMovie->title }}</h1>
@@ -134,15 +141,12 @@
                             <h3 class="movie-title">{{ $movie->title }}</h3>
                         </a>
                         <div class="movie-meta">
-                            <span>{{ $movie->category->name }}</span>
+                            <span>{{ $movie->release_year }}</span>
                             <span>•</span>
                             <span>{{ $movie->duration_string }}</span>
+                            <span>•</span>
+                            <span>{{ $movie->category->name }}</span>
                         </div>
-                        @if($movie->location_tag)
-                            <div class="movie-location">
-                                {{ $movie->location_tag }}
-                            </div>
-                        @endif
                     </div>
                 </div>
             @endforeach
@@ -226,15 +230,12 @@
                             <h3 class="movie-title">{{ $movie->title }}</h3>
                         </a>
                         <div class="movie-meta">
-                            <span>{{ $movie->category->name }}</span>
+                            <span>{{ $movie->release_year }}</span>
                             <span>•</span>
                             <span>{{ $movie->duration_string }}</span>
+                            <span>•</span>
+                            <span>{{ $movie->category->name }}</span>
                         </div>
-                        @if($movie->location_tag)
-                            <div class="movie-location">
-                                {{ $movie->location_tag }}
-                            </div>
-                        @endif
                     </div>
                 </div>
             @endforeach
