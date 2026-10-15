@@ -70,20 +70,20 @@
     </div>
 
     <!-- All Tracks List (Spotify Tracklist Table View) -->
-    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3.5rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+    <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 3.5rem; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.25rem;">
             <div>
-                <h2 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.2rem;">
+                <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.2rem;">
                     Daftar Tembang Tegalan
                 </h2>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">
-                    Klik judhul lagu utawa tombol putar nggo langsung nyetel audio.
+                    Klik judul lagu atau tombol putar untuk memutar audio langsung.
                 </p>
             </div>
 
             <form method="GET" action="{{ route('music.index') }}" style="display: flex; gap: 0.5rem;">
-                <input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Golek tembang utawa artis..." style="width: 240px; padding: 0.5rem 0.85rem; font-size: 0.88rem;">
-                <button type="submit" class="btn btn-primary btn-sm">Golek</button>
+                <input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Cari tembang atau artis..." style="width: 240px; padding: 0.45rem 0.85rem; font-size: 0.85rem;">
+                <button type="submit" class="btn btn-primary btn-sm">Cari</button>
                 @if(request('q'))
                     <a href="{{ route('music.index') }}" class="btn btn-secondary btn-sm">Reset</a>
                 @endif
@@ -91,10 +91,10 @@
         </div>
 
         <!-- Track Table -->
-        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
             @foreach($tracks as $index => $track)
                 <div class="track-card" data-track-id="{{ $track->id }}">
-                    <div style="font-family: monospace; font-size: 0.85rem; color: var(--text-dim); width: 24px; text-align: center;">
+                    <div style="font-family: monospace; font-size: 0.85rem; color: var(--text-muted); width: 24px; text-align: center; font-weight: 600;">
                         {{ $index + 1 }}
                     </div>
 
@@ -106,11 +106,11 @@
                     <div class="track-card-info" onclick="window.playTrackById({{ $track->id }})">
                         <div class="track-card-title">{{ $track->title }}</div>
                         <div class="track-card-artist">
-                            {{ $track->artist }} • <span style="color: var(--text-dim);">{{ $track->album ?? 'Single Tegalan' }}</span>
+                            {{ $track->artist }} • <span style="color: var(--text-muted);">{{ $track->album ?? 'Single Tegalan' }}</span>
                         </div>
                     </div>
 
-                    <div style="font-size: 0.82rem; color: var(--gold-400); width: 140px; display: none; @media(min-width: 768px){display:block;}">
+                    <div style="font-size: 0.82rem; color: var(--gold-700); font-weight: 600; width: 140px; display: none; @media(min-width: 768px){display:block;}">
                         {{ $track->genre ?? 'Pop Ngapak' }}
                     </div>
 
@@ -122,11 +122,11 @@
                                 <span class="badge badge-free">GRATIS</span>
                             @endif
 
-                            <a href="{{ route('music.show', $track->slug) }}" class="btn btn-secondary btn-sm" style="font-size: 0.72rem; padding: 0.2rem 0.5rem;" title="Lirik & Terjemahan">
-                                📜 Lirik
+                            <a href="{{ route('music.show', $track->slug) }}" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 0.25rem 0.6rem;" title="Lirik & Terjemahan">
+                                Lirik
                             </a>
 
-                            <button onclick="window.playTrackById({{ $track->id }})" class="btn btn-primary btn-sm" style="padding: 0.35rem 0.75rem; border-radius: 50%;">
+                            <button onclick="window.playTrackById({{ $track->id }})" class="track-play-btn" title="Putar">
                                 ▶
                             </button>
                         </div>

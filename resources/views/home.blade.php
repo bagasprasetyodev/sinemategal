@@ -179,9 +179,8 @@
                     </div>
                     <div class="track-card-info">
                         <div class="track-card-title">{{ $track->title }}</div>
-                        <div class="track-card-artist">{{ $track->artist }}</div>
-                        <div style="font-size: 0.75rem; color: var(--gold-600); margin-top: 2px;">
-                            {{ $track->genre ?? 'Tembang Ngapak' }}
+                        <div class="track-card-artist">
+                            {{ $track->artist }}@if($track->genre) • <span style="color: var(--gold-600); font-weight: 600;">{{ $track->genre }}</span>@endif
                         </div>
                     </div>
                     <div class="track-card-right">
@@ -275,15 +274,12 @@
                             <h3 class="movie-title">{{ $movie->title }}</h3>
                         </a>
                         <div class="movie-meta">
-                            <span>{{ $movie->category->name }}</span>
+                            <span>{{ $movie->release_year }}</span>
                             <span>•</span>
                             <span>{{ $movie->duration_string }}</span>
+                            <span>•</span>
+                            <span>{{ $movie->category->name }}</span>
                         </div>
-                        @if($movie->location_tag)
-                            <div class="movie-location">
-                                {{ $movie->location_tag }}
-                            </div>
-                        @endif
                     </div>
                 </div>
             @endforeach
