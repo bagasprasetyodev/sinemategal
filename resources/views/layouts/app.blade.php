@@ -133,45 +133,49 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; margin-bottom: 2.5rem;">
                 <div>
                     <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 1.25rem; font-weight: 900; margin-bottom: 0.8rem; color: var(--text-main);">
-                        <div class="brand-icon" style="width: 32px; height: 32px; font-size: 1rem;">🎭</div>
-                        SINEMA TEGAL
+                        <div class="brand-icon" style="width: 30px; height: 30px;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                        <span style="font-weight: 800; color: var(--text-main);">SINEMA</span><span style="font-weight: 800; color: var(--gold-600);">TEGAL</span>
                     </div>
                     <p style="color: var(--text-dim); font-size: 0.88rem; line-height: 1.6;">
                         Platform digital nguri-uri kabudayan Tegal: Tari Mistik Sintren Muarareja, Dokumenter Ki Enthus Susmono, Drama Komedi Ngapak, sarta tembang Pantura legendaris.
                     </p>
                 </div>
                 <div>
-                    <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem;">Kategori Budaya</h4>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.88rem; color: var(--text-muted);">
-                        <li><a href="{{ route('movies.index', ['category' => 'tradisi-mistik-sintren']) }}" style="color: var(--text-muted);">✨ Kesenian Tari Sintren</a></li>
-                        <li><a href="{{ route('movies.index', ['category' => 'wayang-cepak-ki-enthus']) }}" style="color: var(--text-muted);">👺 Wayang Cepak Ki Enthus</a></li>
-                        <li><a href="{{ route('movies.index', ['category' => 'komedi-drama-ngapak']) }}" style="color: var(--text-muted);">😂 Film Komedi Ngapak</a></li>
-                        <li><a href="{{ route('movies.index', ['category' => 'sejarah-budaya-bahari']) }}" style="color: var(--text-muted);">🏛️ Babad Ki Gede Sebayu</a></li>
+                    <h4 style="font-size: 0.92rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Kategori Budaya</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.88rem; color: var(--text-muted);">
+                        <li><a href="{{ route('movies.index', ['category' => 'tradisi-mistik-sintren']) }}" style="color: var(--text-muted);">Kesenian Tari Sintren</a></li>
+                        <li><a href="{{ route('movies.index', ['category' => 'wayang-cepak-ki-enthus']) }}" style="color: var(--text-muted);">Wayang Cepak Ki Enthus</a></li>
+                        <li><a href="{{ route('movies.index', ['category' => 'komedi-drama-ngapak']) }}" style="color: var(--text-muted);">Sinema Komedi Ngapak</a></li>
+                        <li><a href="{{ route('movies.index', ['category' => 'sejarah-budaya-bahari']) }}" style="color: var(--text-muted);">Babad Ki Gede Sebayu</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem;">Layanan & Fitur</h4>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.88rem; color: var(--text-muted);">
-                        <li><a href="{{ route('subscriptions.index') }}" style="color: var(--text-muted);">👑 Paket Langganan VIP Wasgitel</a></li>
-                        <li><a href="{{ route('movies.index', ['access' => 'ticket']) }}" style="color: var(--text-muted);">🎟️ Bioskop Tiket Premiere</a></li>
-                        <li><a href="{{ route('music.index') }}" style="color: var(--text-muted);">🎵 Nada Tegalan Pantura</a></li>
-                        <li><a href="{{ route('admin.dashboard') }}" style="color: var(--gold-700); font-weight: 700;">⚙️ Panel Kelola Admin</a></li>
+                    <h4 style="font-size: 0.92rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Layanan & Fitur</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.88rem; color: var(--text-muted);">
+                        <li><a href="{{ route('subscriptions.index') }}" style="color: var(--text-muted);">Paket Langganan VIP Wasgitel</a></li>
+                        <li><a href="{{ route('movies.index', ['access' => 'ticket']) }}" style="color: var(--text-muted);">Bioskop Tiket Premiere</a></li>
+                        <li><a href="{{ route('music.index') }}" style="color: var(--text-muted);">Arsip Nada Tegalan Pantura</a></li>
+                        <li><a href="{{ route('wallet.index') }}" style="color: var(--text-muted);">Dompet Bahari Digital</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem;">Filosofi Tegal</h4>
-                    <div style="background: var(--gold-50); border: 1px solid var(--gold-100); border-radius: 12px; padding: 1rem;">
-                        <div style="font-size: 0.85rem; font-weight: 700; color: var(--gold-700); margin-bottom: 0.35rem;">
+                    <h4 style="font-size: 0.92rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Filosofi Tegal</h4>
+                    <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+                        <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.35rem;">
                             "Wasgitel: Wangi, Sepet, Legi, tur Kentel."
                         </div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5;">
-                            Ciri khas karakter wong Tegal: ceplas-ceplos nanging tulus, guyub rukun ngguyoni urip sinambi ngeteh poci.
+                        <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+                            Karakter khas wong Tegal: ceplas-ceplos nanging tulus, guyub rukun sinambi ngeteh poci tanah liat.
                         </div>
                     </div>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; font-size: 0.82rem; color: var(--text-dim);">
-                © 2026 Sinema Tegal • Desain Minimalis & Modern Budaya Pantura
+            <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 1.5rem; font-size: 0.82rem; color: var(--text-muted);">
+                © 2026 Sinema Tegal • Platform Streaming & Pelestarian Budaya Bahari
             </div>
         </div>
     </footer>
