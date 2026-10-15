@@ -20,8 +20,8 @@ COPY . .
 
 RUN composer install --ignore-platform-req=php --no-dev --optimize-autoloader --no-interaction
 
-RUN chmod -R 777 storage bootstrap/cache database
+RUN chmod +x entrypoint.sh
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "touch database/database.sqlite && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"]
+CMD ["/app/entrypoint.sh"]
