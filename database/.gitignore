@@ -1,1 +1,4 @@
-*.sqlite*
+# Ignore sqlite temporary journal files but allow database.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
