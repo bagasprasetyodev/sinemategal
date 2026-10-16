@@ -247,8 +247,19 @@ p {
   background: transparent;
   border: none;
   padding: 0;
-  width: 34px;
-  height: 34px;
+  width: auto;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon-logo img {
+  height: 46px;
+  width: auto;
+  max-height: 46px;
+  object-fit: contain;
+  display: block;
 }
 
 
