@@ -2347,6 +2347,14 @@ p {
   pointer-events: none;
 }
 
+.movie-card:hover .movie-card-video {
+  opacity: 1;
+}
+
+.movie-card:hover .movie-poster {
+  opacity: 0;
+}
+
 .movie-poster-wrap.is-playing-video .movie-card-video {
   opacity: 1;
 }
@@ -2369,14 +2377,15 @@ p {
 .movie-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.92) 100%);
-  opacity: 0.6;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.3) 50%, rgba(15, 23, 42, 0.88) 100%);
+  opacity: 0.5;
   transition: opacity 0.3s ease;
   z-index: 3;
+  pointer-events: none;
 }
 
-.movie-poster-wrap.is-playing-video .movie-card-overlay {
-  opacity: 0.35;
+.movie-card:hover .movie-card-overlay {
+  opacity: 0.25;
 }
 
 .movie-video-badge {
@@ -2400,7 +2409,7 @@ p {
   pointer-events: none;
 }
 
-.movie-poster-wrap.is-playing-video .movie-video-badge {
+.movie-card:hover .movie-video-badge {
   opacity: 1;
   transform: translateY(0);
 }
@@ -2422,21 +2431,21 @@ p {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-end;
   justify-content: center;
-  gap: 0.65rem;
+  gap: 0.5rem;
   opacity: 0;
-  transform: scale(0.92);
+  transform: translateY(8px);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 5;
   pointer-events: none;
-  padding: 1rem;
+  padding: 0.85rem;
 }
 
 .movie-card:hover .movie-card-hover-actions {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
   pointer-events: auto;
 }
 

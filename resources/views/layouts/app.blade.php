@@ -450,51 +450,44 @@
             }
 
             // ==========================================================================
-            // Hover-to-Play Video Trailer on Movie Poster Cards (Netflix Style)
+            // Hover-to-Play Video Trailer on Movie Poster Cards (Instant & Smooth)
             // ==========================================================================
             let activePlayingWrap = null;
-            let posterHoverTimeout = null;
 
-            document.querySelectorAll('.movie-poster-wrap[data-trailer]').forEach(wrap => {
+            document.querySelectorAll('.movie-card').forEach(card => {
+                const wrap = card.querySelector('.movie-poster-wrap');
+                if (!wrap) return;
                 const trailerUrl = wrap.dataset.trailer;
                 if (!trailerUrl) return;
 
-                wrap.addEventListener('mouseenter', () => {
-                    posterHoverTimeout = setTimeout(() => {
-                        // Stop any other currently playing poster
-                        if (activePlayingWrap && activePlayingWrap !== wrap) {
-                            stopPosterVideo(activePlayingWrap);
-                        }
+                // Pre-create video element with muted autoplay attributes
+                let video = wrap.querySelector('.movie-card-video');
+                if (!video) {
+                    video = document.createElement('video');
+                    video.className = 'movie-card-video';
+                    video.muted = true;
+                    video.defaultMuted = true;
+                    video.playsInline = true;
+                    video.loop = true;
+                    video.setAttribute('muted', '');
+                    video.setAttribute('playsinline', '');
+                    video.setAttribute('webkit-playsinline', '');
+                    video.preload = 'metadata';
+                    video.src = trailerUrl;
+                    wrap.insertBefore(video, wrap.firstChild);
+                }
 
-                        let video = wrap.querySelector('.movie-card-video');
-                        if (!video) {
-                            video = document.createElement('video');
-                            video.className = 'movie-card-video';
-                            video.muted = true;
-                            video.playsInline = true;
-                            video.loop = true;
-                            video.setAttribute('preload', 'auto');
-                            wrap.appendChild(video);
-                        }
+                card.addEventListener('mouseenter', () => {
+                    if (activePlayingWrap && activePlayingWrap !== wrap) {
+                        stopPosterVideo(activePlayingWrap);
+                    }
+                    wrap.classList.add('is-playing-video');
+                    activePlayingWrap = wrap;
 
-                        if (video.src !== trailerUrl) {
-                            video.src = trailerUrl;
-                        }
-
-                        const playPromise = video.play();
-                        if (playPromise !== undefined) {
-                            playPromise.then(() => {
-                                wrap.classList.add('is-playing-video');
-                                activePlayingWrap = wrap;
-                            }).catch(() => {
-                                // Browser policy fallback
-                            });
-                        }
-                    }, 280); // 280ms debounce so rapid mouse scrolling doesn't spam videos
+                    video.play().catch(() => {});
                 });
 
-                wrap.addEventListener('mouseleave', () => {
-                    clearTimeout(posterHoverTimeout);
+                card.addEventListener('mouseleave', () => {
                     stopPosterVideo(wrap);
                 });
             });
