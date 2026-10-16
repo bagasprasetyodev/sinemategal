@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <!-- Hero Banner (Clean Cinema Marquee) -->
+    <!-- Hero Banner (Cinematic Visual Marquee) -->
     @if($featuredMovie)
     <section class="hero-banner" style="background-image: url('{{ $featuredMovie->banner_url }}');">
         <div class="hero-overlay"></div>
@@ -32,87 +32,145 @@
                 <p class="hero-tagline">"{{ $featuredMovie->tagline }}"</p>
             @endif
 
-            <p class="hero-synopsis">{{ $featuredMovie->synopsis }}</p>
-
-            <div class="hero-actions">
+            <div class="hero-actions" style="margin-top: 1.25rem;">
                 @php
                     $user = Auth::user();
                     $accessCheck = $user ? $user->canAccessMovie($featuredMovie) : ['allowed' => ($featuredMovie->access_type === 'free')];
                 @endphp
 
                 @if($accessCheck['allowed'])
-                    <a href="{{ route('movies.watch', $featuredMovie->slug) }}" class="btn btn-primary btn-lg">
-                        Putar Film Sekarang
+                    <a href="{{ route('movies.watch', $featuredMovie->slug) }}" class="btn btn-primary btn-lg pulse-button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 6px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        Putar Film
                     </a>
                 @elseif($featuredMovie->access_type === 'ticket')
-                    <a href="{{ route('movies.show', $featuredMovie->slug) }}" class="btn btn-crimson btn-lg">
-                        Beli Tiket Premiere ({{ $featuredMovie->formatted_price }})
+                    <a href="{{ route('movies.show', $featuredMovie->slug) }}" class="btn btn-crimson btn-lg pulse-button">
+                        🎟 Beli Tiket ({{ $featuredMovie->formatted_price }})
                     </a>
                 @else
-                    <a href="{{ route('subscriptions.index') }}" class="btn btn-primary btn-lg">
-                        Buka Akses VIP Sebayu
+                    <a href="{{ route('subscriptions.index') }}" class="btn btn-primary btn-lg pulse-button">
+                        👑 Akses VIP Sebayu
                     </a>
                 @endif
 
+                @if($featuredMovie->trailer_url)
+                    <button type="button" class="btn btn-secondary btn-lg" onclick="openTrailerModal('{{ addslashes($featuredMovie->title) }}', '{{ $featuredMovie->trailer_url }}', '{{ route('movies.show', $featuredMovie->slug) }}')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon></svg>
+                        Tonton Cuplikan
+                    </button>
+                @endif
+
                 <a href="{{ route('movies.show', $featuredMovie->slug) }}" class="btn btn-secondary btn-lg">
-                    Detail Film & Budaya
+                    Detail Sinema
                 </a>
             </div>
         </div>
     </section>
     @endif
 
-    <!-- Highlight Stats Bar (Professional Metrics) -->
+    <!-- Highlight Stats Bar (Visual Icons) -->
     <div class="stats-grid">
         <div class="stat-card">
             <div class="stat-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
             </div>
             <div>
-                <div class="stat-value">{{ $trendingMovies->count() }}+ Judul</div>
-                <div class="stat-label">Sinema & Dokumenter</div>
+                <div class="stat-value">{{ $trendingMovies->count() }}+ Sinema</div>
+                <div class="stat-label">Film & Dokumenter</div>
             </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
             </div>
             <div>
-                <div class="stat-value">{{ $featuredTracks->count() }}+ Lagu</div>
-                <div class="stat-label">Arsip Nada Pantura</div>
+                <div class="stat-value">{{ $featuredTracks->count() }}+ Tembang</div>
+                <div class="stat-label">Nada Pantura</div>
             </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
             </div>
             <div>
                 <div class="stat-value">Pay-Per-View</div>
-                <div class="stat-label">Tiket Bioskop Mandiri</div>
+                <div class="stat-label">Tiket Mandiri</div>
             </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
             </div>
             <div>
                 <div class="stat-value">Wasgitel VIP</div>
-                <div class="stat-label">Akses Arsip Lengkap</div>
+                <div class="stat-label">Akses Seluruh Koleksi</div>
             </div>
         </div>
     </div>
+
+    <!-- Section: Galeri Visual Pesona Sinema & Budaya Tegal -->
+    <section class="section">
+        <div class="section-header">
+            <div>
+                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--gold-600); letter-spacing: 0.05em; margin-bottom: 0.2rem;">
+                    EKSPLORASI VISUAL
+                </div>
+                <h2 class="section-title">Pesona Sinema & Warisan Tegal</h2>
+            </div>
+            <a href="{{ route('movies.index') }}" class="view-all-link">
+                Semua Koleksi →
+            </a>
+        </div>
+
+        <div class="culture-gallery-grid">
+            <a href="{{ route('movies.show', 'sintren-tembang-asmara-muarareja') }}" class="culture-gallery-card">
+                <img src="/images/poster-sintren.jpg" alt="Sintren Muarareja" loading="lazy">
+                <div class="culture-gallery-overlay">
+                    <span class="culture-gallery-tag">Seni Mistis Pesisir</span>
+                    <h3 class="culture-gallery-title">Sintren Muarareja</h3>
+                </div>
+            </a>
+            <a href="{{ route('movies.show', 'ki-enthus-susmono-dalang-gila-pesisir') }}" class="culture-gallery-card">
+                <img src="/images/poster-enthus.jpg" alt="Wayang Ki Enthus" loading="lazy">
+                <div class="culture-gallery-overlay">
+                    <span class="culture-gallery-tag">Dalang Maestro</span>
+                    <h3 class="culture-gallery-title">Wayang Ki Enthus</h3>
+                </div>
+            </a>
+            <a href="{{ route('movies.show', 'misteri-cerobong-pabrik-gula-jatibarang-1891') }}" class="culture-gallery-card">
+                <img src="/images/poster-jatibarang.jpg" alt="Pabrik Gula Jatibarang" loading="lazy">
+                <div class="culture-gallery-overlay">
+                    <span class="culture-gallery-tag">Warisan Industri 1891</span>
+                    <h3 class="culture-gallery-title">PG Jatibarang</h3>
+                </div>
+            </a>
+            <a href="{{ route('movies.show', 'warteg-empire-invasi-rasa-pantura') }}" class="culture-gallery-card">
+                <img src="/images/poster-warteg.jpg" alt="Warteg Empire" loading="lazy">
+                <div class="culture-gallery-overlay">
+                    <span class="culture-gallery-tag">Komedi Kuliner</span>
+                    <h3 class="culture-gallery-title">Warteg Empire</h3>
+                </div>
+            </a>
+            <a href="{{ route('movies.show', 'jodoh-segelas-teh-poci-wasgitel') }}" class="culture-gallery-card">
+                <img src="/images/poster-tehpoci.jpg" alt="Teh Poci Wasgitel" loading="lazy">
+                <div class="culture-gallery-overlay">
+                    <span class="culture-gallery-tag">Tradisi Moci</span>
+                    <h3 class="culture-gallery-title">Teh Poci Wasgitel</h3>
+                </div>
+            </a>
+        </div>
+    </section>
 
     <!-- Section 1: Film Bioskop Rakyat (Sistem Tiket Premiere) -->
     <section class="section">
         <div class="section-header">
             <div>
                 <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--rose-600); letter-spacing: 0.05em; margin-bottom: 0.2rem;">
-                    SELEKSI PREMIERE
+                    PREMIERE EKSKLUSIF
                 </div>
                 <h2 class="section-title">
                     Bioskop Rakyat & Tiket Premiere
                 </h2>
-                <p class="section-subtitle">Tonton karya premiere sineas Tegal dengan tiket mandiri (Pay-Per-View).</p>
             </div>
             <a href="{{ route('movies.index', ['access' => 'ticket']) }}" class="view-all-link">
                 Daftar Tiket Film →
@@ -132,9 +190,20 @@
                         </div>
                         <div class="movie-rating">★ {{ $movie->rating }}</div>
                         <div class="movie-card-overlay"></div>
-                        <a href="{{ route('movies.show', $movie->slug) }}" class="movie-play-btn" title="Nonton Film">
-                            ▶
-                        </a>
+                        
+                        <!-- Hover Video & Play Actions -->
+                        <div class="movie-card-hover-actions">
+                            <a href="{{ route('movies.show', $movie->slug) }}" class="btn-card-action btn-card-play">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                <span>Putar</span>
+                            </a>
+                            @if($movie->trailer_url)
+                                <button type="button" class="btn-card-action btn-card-trailer" onclick="openTrailerModal('{{ addslashes($movie->title) }}', '{{ $movie->trailer_url }}', '{{ route('movies.show', $movie->slug) }}')">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon></svg>
+                                    <span>Cuplikan</span>
+                                </button>
+                            @endif
+                        </div>
                     </div>
                     <div class="movie-info">
                         <a href="{{ route('movies.show', $movie->slug) }}">
@@ -153,8 +222,8 @@
         </div>
     </section>
 
-    <!-- Section 2: Nada Tegalan (Clean Minimalist Audio Showcase) -->
-    <section class="section" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem; box-shadow: var(--shadow-xs);">
+    <!-- Section 2: Nada Tegalan (Minimalist Audio Showcase) -->
+    <section class="section" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-xs);">
         <div class="section-header" style="margin-bottom: 1.25rem;">
             <div>
                 <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--gold-600); font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.2rem;">
@@ -163,7 +232,6 @@
                 <h2 class="section-title">
                     Nada Tradisi & Tembang Pantura
                 </h2>
-                <p class="section-subtitle">Dengarkan gending Sintren, pop Ngapak, dan campursari pesisir langsung di browser.</p>
             </div>
             <a href="{{ route('music.index') }}" class="btn btn-secondary btn-sm">
                 Buka Katalog Musik →
@@ -200,10 +268,12 @@
     <section class="section">
         <div class="section-header">
             <div>
+                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--gold-600); letter-spacing: 0.05em; margin-bottom: 0.2rem;">
+                    AKSES WASGITEL VIP
+                </div>
                 <h2 class="section-title">
-                    Arsip VIP & Koleksi Wayang Ki Enthus
+                    Arsip Wayang & Sejarah Pantura
                 </h2>
-                <p class="section-subtitle">Dokumenter langka dan pementasan wayang pesisiran khusus anggota langganan VIP Wasgitel.</p>
             </div>
             <a href="{{ route('movies.index', ['access' => 'vip']) }}" class="view-all-link">
                 Lihat Koleksi VIP →
@@ -220,9 +290,20 @@
                         </div>
                         <div class="movie-rating">★ {{ $movie->rating }}</div>
                         <div class="movie-card-overlay"></div>
-                        <a href="{{ route('movies.show', $movie->slug) }}" class="movie-play-btn" title="Nonton Film">
-                            ▶
-                        </a>
+                        
+                        <!-- Hover Video & Play Actions -->
+                        <div class="movie-card-hover-actions">
+                            <a href="{{ route('movies.show', $movie->slug) }}" class="btn-card-action btn-card-play">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                <span>Putar</span>
+                            </a>
+                            @if($movie->trailer_url)
+                                <button type="button" class="btn-card-action btn-card-trailer" onclick="openTrailerModal('{{ addslashes($movie->title) }}', '{{ $movie->trailer_url }}', '{{ route('movies.show', $movie->slug) }}')">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon></svg>
+                                    <span>Cuplikan</span>
+                                </button>
+                            @endif
+                        </div>
                     </div>
                     <div class="movie-info">
                         <a href="{{ route('movies.show', $movie->slug) }}">
@@ -245,10 +326,12 @@
     <section class="section">
         <div class="section-header">
             <div>
+                <div style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--green-600); letter-spacing: 0.05em; margin-bottom: 0.2rem;">
+                    BEBAS NONTON
+                </div>
                 <h2 class="section-title">
-                    Koleksi Komedi & Akses Bebas
+                    Koleksi Komedi & Cerita Rakyat
                 </h2>
-                <p class="section-subtitle">Dapat langsung diputar tanpa biaya untuk hiburan budaya khas Tegalan.</p>
             </div>
             <a href="{{ route('movies.index', ['access' => 'free']) }}" class="view-all-link">
                 Semua Film Bebas →
@@ -265,9 +348,20 @@
                         </div>
                         <div class="movie-rating">★ {{ $movie->rating }}</div>
                         <div class="movie-card-overlay"></div>
-                        <a href="{{ route('movies.watch', $movie->slug) }}" class="movie-play-btn" title="Nonton Langsung">
-                            ▶
-                        </a>
+                        
+                        <!-- Hover Video & Play Actions -->
+                        <div class="movie-card-hover-actions">
+                            <a href="{{ route('movies.watch', $movie->slug) }}" class="btn-card-action btn-card-play">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                <span>Putar</span>
+                            </a>
+                            @if($movie->trailer_url)
+                                <button type="button" class="btn-card-action btn-card-trailer" onclick="openTrailerModal('{{ addslashes($movie->title) }}', '{{ $movie->trailer_url }}', '{{ route('movies.show', $movie->slug) }}')">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon></svg>
+                                    <span>Cuplikan</span>
+                                </button>
+                            @endif
+                        </div>
                     </div>
                     <div class="movie-info">
                         <a href="{{ route('movies.show', $movie->slug) }}">
@@ -286,22 +380,25 @@
         </div>
     </section>
 
-    <!-- Banner Ajakan Langganan VIP (Professional Minimalist Banner) -->
-    <section style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem; margin: 3rem 0; box-shadow: var(--shadow-xs);">
-        <div style="max-width: 650px;">
-            <span class="badge badge-vip" style="margin-bottom: 0.75rem;">KEANGGOTAAN VIP WASGITEL</span>
-            <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.65rem; letter-spacing: -0.02em;">
-                Dukung Pelestarian Sinema & Budaya Tegal
+    <!-- Banner Ajakan Langganan VIP (Cinematic Visual Backdrop) -->
+    <section class="vip-cinematic-banner" style="background-image: url('/images/banner-vip.jpg');">
+        <div class="vip-cinematic-overlay"></div>
+        <div class="vip-cinematic-content">
+            <span class="badge badge-vip" style="margin-bottom: 0.85rem; font-size: 0.72rem; padding: 4px 10px;">
+                👑 WASGITEL VIP PASS
+            </span>
+            <h2 style="font-size: 2.1rem; font-weight: 800; color: #ffffff; margin-bottom: 0.65rem; letter-spacing: -0.02em; line-height: 1.2;">
+                Pelestarian Sinema & Budaya Tegal
             </h2>
-            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
-                Mulai dari Rp 29.000/bulan untuk akses tanpa batas ke seluruh arsip wayang cepak langka, film dokumenter Ki Gede Sebayu, dan koleksi tembang Pantura kualitas tinggi.
+            <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.5rem;">
+                Akses tanpa batas seluruh arsip wayang cepak langka, rekaman Ki Enthus Susmono, dan tembang Pantura kualitas HD.
             </p>
-            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                <a href="{{ route('subscriptions.index') }}" class="btn btn-primary btn-lg">
-                    Lihat Paket Berlangganan
+            <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <a href="{{ route('subscriptions.index') }}" class="btn btn-primary btn-lg pulse-button">
+                    Mulai VIP (Rp 29.000/bln)
                 </a>
-                <a href="{{ route('movies.index') }}" class="btn btn-secondary btn-lg">
-                    Jelajahi Katalog Film
+                <a href="{{ route('movies.index') }}" class="btn btn-secondary btn-lg" style="background: rgba(255, 255, 255, 0.15); color: #fff; border-color: rgba(255, 255, 255, 0.3);">
+                    Jelajahi Koleksi
                 </a>
             </div>
         </div>

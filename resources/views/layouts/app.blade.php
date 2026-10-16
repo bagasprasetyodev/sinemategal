@@ -344,9 +344,73 @@
         </div>
     </div>
 
+    <!-- Global Cinematic Video Preview Modal -->
+    <div id="videoPreviewModal" class="video-preview-modal" style="display: none;">
+        <div class="video-preview-backdrop" onclick="closeTrailerModal()"></div>
+        <div class="video-preview-dialog">
+            <div class="video-preview-header">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                    <span class="badge badge-crimson" style="font-size: 0.65rem; padding: 2px 8px; border-radius: 9999px;">CUPLIKAN RESMI</span>
+                    <h3 id="videoModalTitle" class="video-preview-title">Cuplikan Film</h3>
+                </div>
+                <button type="button" class="video-preview-close" onclick="closeTrailerModal()" aria-label="Tutup Cuplikan">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="video-preview-player-wrap">
+                <video id="videoModalPlayer" playsinline controls preload="metadata"></video>
+            </div>
+            <div class="video-preview-footer">
+                <span style="font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 0.4rem;">
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block;"></span>
+                    Sinema Tegal • Pratinjau Kualitas HD
+                </span>
+                <a id="videoModalActionBtn" href="#" class="btn btn-primary btn-sm">
+                    Buka Halaman Film →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts (Root Relative) -->
     <script src="/js/audio-player.js"></script>
     <script>
+        // Global Video Trailer Modal Controller
+        window.openTrailerModal = function(title, trailerUrl, movieUrl) {
+            const modal = document.getElementById('videoPreviewModal');
+            const player = document.getElementById('videoModalPlayer');
+            const titleEl = document.getElementById('videoModalTitle');
+            const actionBtn = document.getElementById('videoModalActionBtn');
+            if (!modal || !player) return;
+            
+            titleEl.textContent = title || 'Cuplikan Film';
+            player.src = trailerUrl;
+            if (actionBtn && movieUrl) {
+                actionBtn.href = movieUrl;
+                actionBtn.style.display = 'inline-flex';
+            } else if (actionBtn) {
+                actionBtn.style.display = 'none';
+            }
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            player.play().catch(() => {});
+        };
+
+        window.closeTrailerModal = function() {
+            const modal = document.getElementById('videoPreviewModal');
+            const player = document.getElementById('videoModalPlayer');
+            if (!modal) return;
+            if (player) {
+                player.pause();
+                player.src = '';
+            }
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        };
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') window.closeTrailerModal();
+        });
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileNavDrawer = document.getElementById('mobileNavDrawer');

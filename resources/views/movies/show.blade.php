@@ -69,9 +69,11 @@
                         </a>
                     @endif
 
-                    <a href="{{ route('movies.watch', $movie->slug) }}" class="btn btn-secondary" style="background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.25); color: #ffffff; padding: 0.75rem 1.5rem; font-size: 0.95rem;">
-                        Cuplikan Trailer
-                    </a>
+                    @if($movie->trailer_url)
+                        <button type="button" class="btn btn-secondary" onclick="openTrailerModal('{{ addslashes($movie->title) }}', '{{ $movie->trailer_url }}')" style="background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.25); color: #ffffff; padding: 0.75rem 1.5rem; font-size: 0.95rem; cursor: pointer;">
+                            🎬 Tonton Cuplikan
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>

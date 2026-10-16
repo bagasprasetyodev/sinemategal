@@ -68,9 +68,20 @@
                         </div>
                         <div class="movie-rating">★ {{ $movie->rating }}</div>
                         <div class="movie-card-overlay"></div>
-                        <a href="{{ route('movies.show', $movie->slug) }}" class="movie-play-btn" title="Nonton Film">
-                            ▶
-                        </a>
+                        
+                        <!-- Hover Video & Play Actions -->
+                        <div class="movie-card-hover-actions">
+                            <a href="{{ route('movies.show', $movie->slug) }}" class="btn-card-action btn-card-play">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                <span>Putar</span>
+                            </a>
+                            @if($movie->trailer_url)
+                                <button type="button" class="btn-card-action btn-card-trailer" onclick="openTrailerModal('{{ addslashes($movie->title) }}', '{{ $movie->trailer_url }}', '{{ route('movies.show', $movie->slug) }}')">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon></svg>
+                                    <span>Cuplikan</span>
+                                </button>
+                            @endif
+                        </div>
                     </div>
                     <div class="movie-info">
                         <a href="{{ route('movies.show', $movie->slug) }}">
