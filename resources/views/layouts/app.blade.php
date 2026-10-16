@@ -448,6 +448,69 @@
                     }
                 });
             }
+
+            // ==========================================================================
+            // Hover-to-Play Video Trailer on Movie Poster Cards (Netflix Style)
+            // ==========================================================================
+            let activePlayingWrap = null;
+            let posterHoverTimeout = null;
+
+            document.querySelectorAll('.movie-poster-wrap[data-trailer]').forEach(wrap => {
+                const trailerUrl = wrap.dataset.trailer;
+                if (!trailerUrl) return;
+
+                wrap.addEventListener('mouseenter', () => {
+                    posterHoverTimeout = setTimeout(() => {
+                        // Stop any other currently playing poster
+                        if (activePlayingWrap && activePlayingWrap !== wrap) {
+                            stopPosterVideo(activePlayingWrap);
+                        }
+
+                        let video = wrap.querySelector('.movie-card-video');
+                        if (!video) {
+                            video = document.createElement('video');
+                            video.className = 'movie-card-video';
+                            video.muted = true;
+                            video.playsInline = true;
+                            video.loop = true;
+                            video.setAttribute('preload', 'auto');
+                            wrap.appendChild(video);
+                        }
+
+                        if (video.src !== trailerUrl) {
+                            video.src = trailerUrl;
+                        }
+
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                wrap.classList.add('is-playing-video');
+                                activePlayingWrap = wrap;
+                            }).catch(() => {
+                                // Browser policy fallback
+                            });
+                        }
+                    }, 280); // 280ms debounce so rapid mouse scrolling doesn't spam videos
+                });
+
+                wrap.addEventListener('mouseleave', () => {
+                    clearTimeout(posterHoverTimeout);
+                    stopPosterVideo(wrap);
+                });
+            });
+
+            function stopPosterVideo(wrap) {
+                if (!wrap) return;
+                wrap.classList.remove('is-playing-video');
+                const video = wrap.querySelector('.movie-card-video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+                if (activePlayingWrap === wrap) {
+                    activePlayingWrap = null;
+                }
+            }
         });
     </script>
     @yield('scripts')

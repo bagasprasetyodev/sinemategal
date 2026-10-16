@@ -180,8 +180,9 @@
         <div class="grid-movies">
             @foreach($ticketMovies as $index => $movie)
                 <div class="movie-card">
-                    <div class="movie-poster-wrap">
+                    <div class="movie-poster-wrap" data-trailer="{{ $movie->trailer_url }}">
                         <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="movie-poster" loading="lazy">
+                        <div class="movie-video-badge"><span class="video-pulse-dot"></span><span>Cuplikan</span></div>
                         <div style="position: absolute; top: 0.75rem; left: 0.75rem; width: 28px; height: 28px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; z-index: 3;">
                             {{ $loop->iteration }}
                         </div>
@@ -283,8 +284,9 @@
         <div class="grid-movies">
             @foreach($vipMovies as $movie)
                 <div class="movie-card">
-                    <div class="movie-poster-wrap">
+                    <div class="movie-poster-wrap" data-trailer="{{ $movie->trailer_url }}">
                         <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="movie-poster" loading="lazy">
+                        <div class="movie-video-badge"><span class="video-pulse-dot"></span><span>Cuplikan</span></div>
                         <div class="movie-badge-top">
                             <span class="badge badge-vip">VIP SEBAYU</span>
                         </div>
@@ -341,8 +343,9 @@
         <div class="grid-movies">
             @foreach($freeMovies as $movie)
                 <div class="movie-card">
-                    <div class="movie-poster-wrap">
+                    <div class="movie-poster-wrap" data-trailer="{{ $movie->trailer_url }}">
                         <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" class="movie-poster" loading="lazy">
+                        <div class="movie-video-badge"><span class="video-pulse-dot"></span><span>Cuplikan</span></div>
                         <div class="movie-badge-top">
                             <span class="badge badge-free">GRATIS</span>
                         </div>

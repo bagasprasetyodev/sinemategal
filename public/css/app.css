@@ -2335,6 +2335,33 @@ p {
   background: #0f172a;
 }
 
+.movie-card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.movie-poster-wrap.is-playing-video .movie-card-video {
+  opacity: 1;
+}
+
+.movie-poster-wrap.is-playing-video .movie-poster {
+  opacity: 0;
+}
+
+.movie-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, opacity 0.35s ease;
+}
+
 .movie-card:hover .movie-poster {
   transform: scale(1.08);
 }
@@ -2345,10 +2372,50 @@ p {
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.92) 100%);
   opacity: 0.6;
   transition: opacity 0.3s ease;
+  z-index: 3;
 }
 
-.movie-card:hover .movie-card-overlay {
-  opacity: 0.9;
+.movie-poster-wrap.is-playing-video .movie-card-overlay {
+  opacity: 0.35;
+}
+
+.movie-video-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 7;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.movie-poster-wrap.is-playing-video .movie-video-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.video-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: videoPulse 1.2s infinite;
+}
+
+@keyframes videoPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 .movie-card-hover-actions {
@@ -2371,6 +2438,11 @@ p {
   opacity: 1;
   transform: scale(1);
   pointer-events: auto;
+}
+
+.movie-poster-wrap.is-playing-video .movie-card-hover-actions {
+  justify-content: flex-end;
+  padding-bottom: 1.25rem;
 }
 
 .btn-card-action {
