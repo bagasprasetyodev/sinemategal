@@ -243,6 +243,15 @@ p {
   flex-shrink: 0;
 }
 
+.brand-icon-logo {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 34px;
+  height: 34px;
+}
+
+
 .brand-badge {
   font-size: 0.62rem;
   font-weight: 600;

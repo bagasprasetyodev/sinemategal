@@ -24,10 +24,8 @@
         <div class="container nav-container">
             <!-- Brand Logo -->
             <a href="{{ route('home') }}" class="nav-brand">
-                <div class="brand-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
+                <div class="brand-icon brand-icon-logo">
+                    <img src="/images/logo.png" alt="Sinema Tegal Logo" style="width: 26px; height: 26px; object-fit: contain; border-radius: 4px;">
                 </div>
                 <div style="display: flex; align-items: center;">
                     <span style="font-weight: 800; color: var(--text-main);">SINEMA</span><span style="font-weight: 800; color: var(--gold-600);">TEGAL</span>
@@ -116,6 +114,14 @@
     <!-- Mobile Navigation Drawer -->
     <div id="mobileNavDrawer" class="mobile-nav-drawer">
         <div class="mobile-nav-inner">
+            <!-- Drawer Brand Header -->
+            <div style="display: flex; align-items: center; gap: 0.65rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 0.25rem;">
+                <img src="/images/logo.png" alt="Sinema Tegal" style="width: 32px; height: 32px; object-fit: contain;">
+                <div>
+                    <div style="font-weight: 800; font-size: 1rem; color: var(--text-main); letter-spacing: -0.02em;"><span>SINEMA</span><span style="color: var(--gold-600);">TEGAL</span></div>
+                    <div style="font-size: 0.68rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Platform Budaya</div>
+                </div>
+            </div>
             <nav class="mobile-nav-links">
                 <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
