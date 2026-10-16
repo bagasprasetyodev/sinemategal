@@ -96,9 +96,85 @@
                     <a href="{{ route('login') }}" class="btn btn-secondary btn-sm">Masuk</a>
                     <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Daftar</a>
                 @endauth
+
+                <!-- Mobile Hamburger Toggle Button -->
+                <button type="button" class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Buka Menu Navigasi" aria-expanded="false">
+                    <svg class="hamburger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileNavDrawer" class="mobile-nav-drawer">
+        <div class="mobile-nav-inner">
+            <nav class="mobile-nav-links">
+                <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span>Beranda</span>
+                </a>
+                <a href="{{ route('movies.index') }}" class="mobile-nav-link {{ request()->routeIs('movies.*') ? 'active' : '' }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                    <span>Sinema & Film</span>
+                </a>
+                <a href="{{ route('music.index') }}" class="mobile-nav-link {{ request()->routeIs('music.*') ? 'active' : '' }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                    <span>Nada Tradisi</span>
+                </a>
+                <a href="{{ route('subscriptions.index') }}" class="mobile-nav-link {{ request()->routeIs('subscriptions.*') ? 'active' : '' }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    <span>Langganan VIP</span>
+                </a>
+                @auth
+                <a href="{{ route('tickets.mine') }}" class="mobile-nav-link {{ request()->routeIs('tickets.*') ? 'active' : '' }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                    <span>Tiket Saya</span>
+                </a>
+                <a href="{{ route('wallet.index') }}" class="mobile-nav-link {{ request()->routeIs('wallet.*') ? 'active' : '' }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span>Dompet Bahari</span>
+                        <span style="font-weight: 700; color: var(--green-700);">Rp {{ number_format(Auth::user()->wallet_balance, 0, ',', '.') }}</span>
+                    </div>
+                </a>
+                @endauth
+            </nav>
+
+            <div class="mobile-nav-footer">
+                @auth
+                    <div class="mobile-user-profile">
+                        <img src="{{ Auth::user()->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100' }}" alt="Avatar" class="user-avatar" style="width: 38px; height: 38px;">
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="font-weight: 700; color: var(--text-main); font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ Auth::user()->name }}</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ Auth::user()->email }}</div>
+                        </div>
+                        @if(Auth::user()->hasVipAccess())
+                            <span class="badge badge-vip" style="font-size: 0.65rem;">VIP</span>
+                        @endif
+                    </div>
+                    <form action="{{ route('logout') }}" method="POST" style="margin-top: 0.75rem;">
+                        @csrf
+                        <button type="submit" class="btn btn-secondary btn-sm" style="width: 100%; justify-content: center;">
+                            Keluar dari Akun
+                        </button>
+                    </form>
+                @else
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                        <a href="{{ route('login') }}" class="btn btn-secondary" style="justify-content: center;">Masuk</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary" style="justify-content: center;">Daftar</a>
+                    </div>
+                @endauth
+            </div>
+        </div>
+    </div>
 
     <!-- Flash Messages -->
     <div class="container">
@@ -270,6 +346,46 @@
 
     <!-- Scripts (Root Relative) -->
     <script src="/js/audio-player.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+            if (mobileMenuBtn && mobileNavDrawer) {
+                const hamburgerIcon = mobileMenuBtn.querySelector('.hamburger-icon');
+                const closeIcon = mobileMenuBtn.querySelector('.close-icon');
+
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isOpen = mobileNavDrawer.classList.toggle('is-open');
+                    mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+                    if (hamburgerIcon) hamburgerIcon.style.display = isOpen ? 'none' : 'block';
+                    if (closeIcon) closeIcon.style.display = isOpen ? 'block' : 'none';
+                });
+
+                // Close when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (mobileNavDrawer.classList.contains('is-open') && 
+                        !mobileNavDrawer.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target)) {
+                        mobileNavDrawer.classList.remove('is-open');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                        if (closeIcon) closeIcon.style.display = 'none';
+                    }
+                });
+
+                // Close on escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && mobileNavDrawer.classList.contains('is-open')) {
+                        mobileNavDrawer.classList.remove('is-open');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                        if (closeIcon) closeIcon.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
     @yield('scripts')
 </body>
 </html>

@@ -30,9 +30,9 @@
         </div>
 
         @if($activeTickets->count() > 0)
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem;">
+            <div class="ticket-grid">
                 @foreach($activeTickets as $ticket)
-                    <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; display: flex; box-shadow: var(--shadow-sm); transition: border-color var(--transition-fast);" onmouseover="this.style.borderColor='var(--border-strong)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                    <div class="ticket-card">
                         <!-- Left Poster -->
                         <div style="width: 120px; flex-shrink: 0; background: var(--bg-subtle);">
                             <img src="{{ $ticket->movie->poster_url }}" alt="{{ $ticket->movie->title }}" style="width: 100%; height: 100%; object-fit: cover;">

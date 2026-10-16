@@ -4,10 +4,10 @@
 
 @section('content')
 <div class="container" style="padding-top: 3.5rem; max-width: 480px;">
-    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-lg);">
+    <div class="auth-card">
         <div style="text-align: center; margin-bottom: 2rem;">
             <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎭</div>
-            <h1 style="font-size: 1.8rem; color: #fff; font-weight: 800; margin-bottom: 0.35rem;">
+            <h1 style="font-size: 1.8rem; color: var(--text-main); font-weight: 800; margin-bottom: 0.35rem;">
                 Mlebu Akun Sinema Tegal
             </h1>
             <p style="color: var(--text-muted); font-size: 0.88rem;">
@@ -45,7 +45,7 @@
                     <a href="{{ route('demo.switch', $du->id) }}" class="btn btn-secondary btn-sm" style="justify-content: flex-start; text-align: left; padding: 0.5rem 0.75rem;">
                         <span>👤</span>
                         <div style="flex-grow: 1;">
-                            <div style="font-weight: 700; color: #fff; font-size: 0.82rem;">{{ $du->name }}</div>
+                            <div style="font-weight: 700; color: var(--text-main); font-size: 0.82rem;">{{ $du->name }}</div>
                             <div style="font-size: 0.72rem; color: var(--text-dim);">
                                 {{ $du->email }} • {{ $du->role }} @if($du->hasVipAccess()) (VIP Aktif) @endif
                             </div>

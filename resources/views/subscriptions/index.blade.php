@@ -9,7 +9,7 @@
         <span class="badge badge-vip" style="margin-bottom: 0.75rem;">
             PROGRAM VIP SEBAYU
         </span>
-        <h1 style="font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; letter-spacing: -0.02em;">
+        <h1 style="font-size: clamp(1.6rem, 5vw, 2.5rem); font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; letter-spacing: -0.02em;">
             Pilih Paket Langganan & Dukung Sineas Tegal
         </h1>
         <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6;">

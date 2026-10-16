@@ -18,9 +18,9 @@
     <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-xs);">
         <form method="GET" action="{{ route('movies.index') }}" style="display: flex; flex-direction: column; gap: 1rem;">
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                <input type="text" name="q" value="{{ request('q') }}" class="form-control" style="flex: 1; min-width: 260px;" placeholder="Cari judul film, sutradara, paraga (pemeran), atau latar lokasi...">
+                <input type="text" name="q" value="{{ request('q') }}" class="form-control" style="flex: 1 1 200px; min-width: 0;" placeholder="Cari judul film, sutradara, paraga (pemeran), atau latar lokasi...">
                 
-                <select name="access" class="form-control" style="width: auto; min-width: 170px;">
+                <select name="access" class="form-control" style="flex: 0 1 auto; min-width: 140px;">
                     <option value="">Semua Tipe Akses</option>
                     <option value="free" {{ request('access') === 'free' ? 'selected' : '' }}>Gratis</option>
                     <option value="vip" {{ request('access') === 'vip' ? 'selected' : '' }}>VIP Sebayu</option>

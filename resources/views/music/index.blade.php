@@ -5,7 +5,7 @@
 @section('content')
 <div class="container" style="padding-top: 2rem;">
     <!-- Music Header Banner (Clean Minimalist Showcase) -->
-    <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; box-shadow: var(--shadow-xs);">
+    <div class="music-header-card">
         <div style="max-width: 650px;">
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                 <span class="badge badge-vip">NADA TRADISI</span>

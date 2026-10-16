@@ -4,10 +4,10 @@
 
 @section('content')
 <div class="container" style="padding-top: 3.5rem; max-width: 480px;">
-    <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-lg);">
+    <div class="auth-card">
         <div style="text-align: center; margin-bottom: 2rem;">
             <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎭</div>
-            <h1 style="font-size: 1.8rem; color: #fff; font-weight: 800; margin-bottom: 0.35rem;">
+            <h1 style="font-size: 1.8rem; color: var(--text-main); font-weight: 800; margin-bottom: 0.35rem;">
                 Daftar Warga Sinema Tegal
             </h1>
             <p style="color: var(--text-muted); font-size: 0.88rem;">

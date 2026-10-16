@@ -63,41 +63,41 @@
     @endif
 
     <!-- Highlight Stats Bar (Professional Metrics) -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem;">
-        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
             </div>
             <div>
-                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">{{ $trendingMovies->count() }}+ Judul</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Sinema & Dokumenter</div>
+                <div class="stat-value">{{ $trendingMovies->count() }}+ Judul</div>
+                <div class="stat-label">Sinema & Dokumenter</div>
             </div>
         </div>
-        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+        <div class="stat-card">
+            <div class="stat-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
             </div>
             <div>
-                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">{{ $featuredTracks->count() }}+ Lagu</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Arsip Nada Pantura</div>
+                <div class="stat-value">{{ $featuredTracks->count() }}+ Lagu</div>
+                <div class="stat-label">Arsip Nada Pantura</div>
             </div>
         </div>
-        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+        <div class="stat-card">
+            <div class="stat-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
             </div>
             <div>
-                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">Pay-Per-View</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Tiket Bioskop Mandiri</div>
+                <div class="stat-value">Pay-Per-View</div>
+                <div class="stat-label">Tiket Bioskop Mandiri</div>
             </div>
         </div>
-        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-xs);">
-            <div style="width: 40px; height: 40px; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 700;">
+        <div class="stat-card">
+            <div class="stat-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
             </div>
             <div>
-                <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">Wasgitel VIP</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">Akses Arsip Lengkap</div>
+                <div class="stat-value">Wasgitel VIP</div>
+                <div class="stat-label">Akses Arsip Lengkap</div>
             </div>
         </div>
     </div>

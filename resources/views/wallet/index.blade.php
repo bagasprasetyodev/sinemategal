@@ -5,9 +5,9 @@
 @section('content')
 <div class="container" style="padding-top: 2rem;">
     <!-- Wallet Header & Balance Card -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap;">
+    <div class="wallet-grid">
         <!-- Left: Balance Card (Halobun Minimalist Style) -->
-        <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
+        <div class="wallet-card">
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                     <div>
@@ -22,7 +22,7 @@
                 <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.35rem; font-weight: 500;">
                     Total Saldo Aktif:
                 </div>
-                <div style="font-size: 3rem; font-weight: 900; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -0.02em;">
+                <div class="wallet-balance-amount">
                     <span style="font-size: 1.4rem; color: var(--text-muted); vertical-align: super; font-weight: 600;">Rp</span>
                     {{ number_format($user->wallet_balance, 0, ',', '.') }}
                 </div>

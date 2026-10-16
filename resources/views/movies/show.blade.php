@@ -14,18 +14,18 @@
     </div>
 
     <!-- Movie Detail Header Banner -->
-    <div style="position: relative; border-radius: var(--radius-xl); overflow: hidden; background: #0f172a; border: 1px solid var(--border-color); margin-bottom: 2.5rem; min-height: 440px; display: flex; align-items: flex-end;">
-        <div style="position: absolute; inset: 0; background-image: url('{{ $movie->banner_url }}'); background-size: cover; background-position: center; filter: brightness(0.35);"></div>
-        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.95) 100%);"></div>
+    <div class="movie-detail-banner">
+        <div class="movie-detail-bg" style="background-image: url('{{ $movie->banner_url }}');"></div>
+        <div class="movie-detail-gradient"></div>
 
-        <div style="position: relative; z-index: 2; padding: 2.5rem; display: flex; gap: 2rem; width: 100%; align-items: flex-end; flex-wrap: wrap;">
+        <div class="movie-detail-content">
             <!-- Poster Card -->
-            <div style="width: 220px; aspect-ratio: 2/3; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xl); border: 2px solid rgba(255, 255, 255, 0.2); flex-shrink: 0; background: #000;">
-                <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="movie-detail-poster">
+                <img src="{{ $movie->poster_url }}" alt="{{ $movie->title }}">
             </div>
 
             <!-- Details -->
-            <div style="flex: 1; min-width: 300px;">
+            <div class="movie-detail-info">
                 <div class="hero-meta-row" style="margin-bottom: 0.75rem;">
                     <span class="badge {{ $movie->access_badge['class'] }}">
                         {{ $movie->access_badge['label'] }}
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <h1 style="font-size: 2.5rem; font-weight: 800; color: #ffffff; line-height: 1.15; margin-bottom: 0.4rem; letter-spacing: -0.02em;">
+                <h1 class="movie-detail-title">
                     {{ $movie->title }}
                 </h1>
 
@@ -54,7 +54,7 @@
                 @endif
 
                 <!-- Call to action button -->
-                <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                <div class="movie-detail-actions">
                     @if($accessCheck['allowed'])
                         <a href="{{ route('movies.watch', $movie->slug) }}" class="btn btn-primary" style="padding: 0.75rem 1.75rem; font-size: 0.95rem;">
                             Putar Film Sekarang
@@ -78,7 +78,7 @@
     </div>
 
     <!-- Content Columns -->
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 3.5rem;">
+    <div class="detail-grid">
         <!-- Left: Synopsis & Info -->
         <div>
             <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
