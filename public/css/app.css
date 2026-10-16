@@ -248,18 +248,19 @@ p {
   border: none;
   padding: 0;
   width: auto;
-  height: 46px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .brand-icon-logo img {
-  height: 46px;
+  height: 40px;
   width: auto;
-  max-height: 46px;
+  max-height: 40px;
   object-fit: contain;
   display: block;
+  border-radius: 6px;
 }
 
 

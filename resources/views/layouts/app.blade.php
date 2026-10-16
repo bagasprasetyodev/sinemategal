@@ -25,7 +25,7 @@
             <!-- Brand Logo -->
             <a href="{{ route('home') }}" class="nav-brand">
                 <div class="brand-icon brand-icon-logo">
-                    <img src="/images/logo.png" alt="Sinema Tegal Logo" style="height: 48px; width: auto; object-fit: contain;">
+                    <img src="/images/logo.png" alt="Sinema Tegal Logo" style="height: 40px; width: auto; object-fit: contain;">
                 </div>
                 <div style="display: flex; align-items: center;">
                     <span style="font-weight: 800; color: var(--text-main);">SINEMA</span><span style="font-weight: 800; color: var(--gold-600);">TEGAL</span>
@@ -116,7 +116,7 @@
         <div class="mobile-nav-inner">
             <!-- Drawer Brand Header -->
             <div style="display: flex; align-items: center; gap: 0.65rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 0.25rem;">
-                <img src="/images/logo.png" alt="Sinema Tegal" style="height: 48px; width: auto; object-fit: contain;">
+                <img src="/images/logo.png" alt="Sinema Tegal" style="height: 40px; width: auto; object-fit: contain;">
                 <div>
                     <div style="font-weight: 800; font-size: 1rem; color: var(--text-main); letter-spacing: -0.02em;"><span>SINEMA</span><span style="color: var(--gold-600);">TEGAL</span></div>
                     <div style="font-size: 0.68rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Platform Budaya</div>
