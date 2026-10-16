@@ -122,7 +122,15 @@
                                     <img src="{{ $m->poster_url }}" alt="{{ $m->title }}" style="width: 44px; height: 56px; border-radius: 8px; object-fit: cover; box-shadow: var(--shadow-xs);">
                                     <div>
                                         <div style="font-weight: 800; color: var(--text-main); font-size: 0.95rem;">{{ $m->title }}</div>
-                                        <div style="font-size: 0.78rem; color: var(--text-dim);">{{ $m->release_year }} • {{ $m->location_tag ?? 'Tegal' }}</div>
+                                        <div style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 0.25rem;">{{ $m->release_year }} • {{ $m->location_tag ?? 'Tegal' }}</div>
+                                        <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                                            <span style="font-size: 0.7rem; background: rgba(217, 119, 6, 0.1); color: var(--amber-500); font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid rgba(217, 119, 6, 0.2);">
+                                                🎬 Trailer Hover: {{ $m->trailer_url ? 'Aktif' : 'Belum Ada' }}
+                                            </span>
+                                            <span style="font-size: 0.7rem; background: var(--surface-subtle); color: var(--text-muted); padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--border-subtle);">
+                                                🎥 Full Video: {{ $m->video_url ? 'Tersedia' : 'Kosong' }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -149,7 +157,7 @@
                             <td style="text-align: right;">
                                 <div style="display: flex; justify-content: flex-end; gap: 0.35rem;">
                                     <a href="{{ route('movies.show', $m->slug) }}" class="btn btn-secondary btn-sm" title="Lihat film">Lihat</a>
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick='openEditMovieModal(@json($m))' title="Edit data">Edit</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick='openEditMovieModal(@json($m))' title="Edit data & ganti video" style="font-weight: 600;">Edit / Ganti Video</button>
                                     <form action="{{ route('admin.movies.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Hapus film {{ $m->title }}?');" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -386,7 +394,7 @@
                         <span>🎬</span> Tambah Film / Dokumenter Anyar
                     </h3>
 
-                    <form method="POST" action="{{ route('admin.movies.store') }}">
+                    <form method="POST" action="{{ route('admin.movies.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label class="form-label">Judul Film:</label>
@@ -454,23 +462,46 @@
                             <textarea name="synopsis" class="form-control" rows="3" placeholder="Tulis sinopsis film..." required></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-label">URL Poster (Foto Vertikal):</label>
-                            <input type="url" name="poster_url" value="/images/poster-sintren.jpg" class="form-control" required>
+                        <!-- PENGATURAN VIDEO UTAMA & TRAILER -->
+                        <div style="background: var(--surface-subtle); padding: 1.25rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-bottom: 1.25rem;">
+                            <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🎥</span> Kelola Video Film & Cuplikan Trailer
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">URL / Path Video Streaming Penuh (Full Movie):</label>
+                                <input type="text" name="video_url" value="/videos/trailer-sintren.mp4" class="form-control" placeholder="/videos/film.mp4 atau https://...">
+                                <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Atau upload file video baru (.mp4 / .webm):</div>
+                                <input type="file" name="video_file" accept="video/mp4,video/webm,video/ogg,video/quicktime" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label">URL / Path Video Trailer (Autoplay saat Hover Poster):</label>
+                                <input type="text" name="trailer_url" value="/videos/trailer-sintren.mp4" class="form-control" placeholder="/videos/trailer.mp4 atau https://...">
+                                <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Atau upload file cuplikan trailer (.mp4):</div>
+                                <input type="file" name="trailer_file" accept="video/mp4,video/webm,video/ogg,video/quicktime" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-label">URL Banner Marquee (Horizontal):</label>
-                            <input type="url" name="banner_url" value="/images/banner-arthouse.jpg" class="form-control" required>
-                        </div>
+                        <!-- PENGATURAN POSTER & BANNER -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Poster Vertikal (URL / Path):</label>
+                                <input type="text" name="poster_url" value="/images/poster-sintren.jpg" class="form-control" required>
+                                <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Upload foto poster (opsional):</div>
+                                <input type="file" name="poster_file" accept="image/*" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                            </div>
 
-                        <div class="form-group">
-                            <label class="form-label">URL Video Streaming (mp4 / stream):</label>
-                            <input type="url" name="video_url" value="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" class="form-control" required>
+                            <div class="form-group">
+                                <label class="form-label">Banner Horizontal Marquee (URL / Path):</label>
+                                <input type="text" name="banner_url" value="/images/banner-vip.jpg" class="form-control" required>
+                                <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Upload foto banner (opsional):</div>
+                                <input type="file" name="banner_file" accept="image/*" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                            </div>
                         </div>
 
                         <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="checkbox" name="featured" id="chkFeatured" value="1" style="width: 18px; height: 18px; accent-color: var(--green-600);">
+                            <input type="checkbox" name="featured" id="chkFeatured" value="1" style="width: 18px; height: 18px; accent-color: var(--amber-500);">
                             <label for="chkFeatured" style="font-size: 0.9rem; font-weight: 600; color: var(--text-main); cursor: pointer;">
                                 Tampilna dadi Film Utama (Hero Banner)
                             </label>
@@ -561,7 +592,7 @@
                     <button type="button" onclick="closeEditMovieModal()" style="background: none; border: none; font-size: 1.25rem; color: var(--text-dim); cursor: pointer;">✕</button>
                 </div>
 
-                <form id="editMovieForm" method="POST">
+                <form id="editMovieForm" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -599,9 +630,26 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Sutradara:</label>
-                        <input type="text" id="editMovieDirector" name="director" class="form-control" required>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Sutradara:</label>
+                            <input type="text" id="editMovieDirector" name="director" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tahun Rilis:</label>
+                            <input type="number" id="editMovieYear" name="release_year" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Lokasi Cerita:</label>
+                            <input type="text" id="editMovieLocation" name="location_tag" class="form-control" placeholder="Contoh: Muarareja, Kota Tegal">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tagline Film:</label>
+                            <input type="text" id="editMovieTagline" name="tagline" class="form-control">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -609,14 +657,46 @@
                         <textarea id="editMovieSynopsis" name="synopsis" class="form-control" rows="3" required></textarea>
                     </div>
 
-                    <input type="hidden" id="editMoviePoster" name="poster_url">
-                    <input type="hidden" id="editMovieBanner" name="banner_url">
-                    <input type="hidden" id="editMovieVideo" name="video_url">
-                    <input type="hidden" id="editMovieYear" name="release_year">
+                    <!-- KELOLA & GANTI VIDEO -->
+                    <div style="background: var(--surface-subtle); padding: 1.25rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-bottom: 1.25rem;">
+                        <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🎥</span> Kelola & Ganti Video Film
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">URL / Path Video Streaming Utama (Full Movie):</label>
+                            <input type="text" id="editMovieVideo" name="video_url" class="form-control" placeholder="/videos/film.mp4 atau link URL">
+                            <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Ganti dengan upload video baru (opsional):</div>
+                            <input type="file" name="video_file" accept="video/mp4,video/webm,video/ogg,video/quicktime" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">URL / Path Video Trailer (Autoplay saat Hover Poster):</label>
+                            <input type="text" id="editMovieTrailer" name="trailer_url" class="form-control" placeholder="/videos/trailer.mp4 atau link URL">
+                            <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Ganti dengan upload trailer baru (opsional):</div>
+                            <input type="file" name="trailer_file" accept="video/mp4,video/webm,video/ogg,video/quicktime" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                        </div>
+                    </div>
+
+                    <!-- KELOLA & GANTI POSTER / BANNER -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">URL / Path Poster Vertikal:</label>
+                            <input type="text" id="editMoviePoster" name="poster_url" class="form-control">
+                            <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Upload ganti poster:</div>
+                            <input type="file" name="poster_file" accept="image/*" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">URL / Path Banner Horizontal:</label>
+                            <input type="text" id="editMovieBanner" name="banner_url" class="form-control">
+                            <div style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--text-muted);">Upload ganti banner:</div>
+                            <input type="file" name="banner_file" accept="image/*" class="form-control" style="margin-top: 0.25rem; padding: 0.35rem 0.5rem; font-size: 0.85rem;">
+                        </div>
+                    </div>
 
                     <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
                         <button type="button" onclick="closeEditMovieModal()" class="btn btn-secondary">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-primary">Simpan & Perbarui Video Film</button>
                     </div>
                 </form>
             </div>
@@ -689,17 +769,20 @@
 
     function openEditMovieModal(movie) {
         document.getElementById('editMovieForm').action = '/admin/movies/' + movie.id;
-        document.getElementById('editMovieTitle').value = movie.title;
-        document.getElementById('editMovieCategory').value = movie.category_id;
-        document.getElementById('editMovieAccess').value = movie.access_type;
+        document.getElementById('editMovieTitle').value = movie.title || '';
+        document.getElementById('editMovieCategory').value = movie.category_id || '';
+        document.getElementById('editMovieAccess').value = movie.access_type || 'free';
         document.getElementById('editMoviePrice').value = movie.ticket_price || 0;
-        document.getElementById('editMovieDuration').value = movie.duration_minutes;
-        document.getElementById('editMovieDirector').value = movie.director;
-        document.getElementById('editMovieSynopsis').value = movie.synopsis;
-        document.getElementById('editMoviePoster').value = movie.poster_url;
-        document.getElementById('editMovieBanner').value = movie.banner_url;
-        document.getElementById('editMovieVideo').value = movie.video_url;
-        document.getElementById('editMovieYear').value = movie.release_year;
+        document.getElementById('editMovieDuration').value = movie.duration_minutes || 90;
+        document.getElementById('editMovieDirector').value = movie.director || '';
+        document.getElementById('editMovieYear').value = movie.release_year || 2026;
+        document.getElementById('editMovieLocation').value = movie.location_tag || '';
+        document.getElementById('editMovieTagline').value = movie.tagline || '';
+        document.getElementById('editMovieSynopsis').value = movie.synopsis || '';
+        document.getElementById('editMoviePoster').value = movie.poster_url || '';
+        document.getElementById('editMovieBanner').value = movie.banner_url || '';
+        document.getElementById('editMovieVideo').value = movie.video_url || '';
+        document.getElementById('editMovieTrailer').value = movie.trailer_url || movie.video_url || '';
 
         document.getElementById('editMovieModal').classList.add('is-active');
     }
