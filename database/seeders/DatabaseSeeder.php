@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use App\Models\Category;
 use App\Models\Movie;
-use App\Models\Track;
-use App\Models\Ticket;
-use App\Models\Subscription;
 use App\Models\Playlist;
+use App\Models\Subscription;
+use App\Models\Ticket;
+use App\Models\Track;
+use App\Models\User;
 use App\Models\WalletTransaction;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -440,5 +440,7 @@ class DatabaseSeeder extends Seeder
             'reference_id' => 'SUB-WASGITEL-002',
             'description' => 'Langganan VIP Paket Wasgitel (3 Bulan)',
         ]);
+
+        $this->call(TembangDolananSeeder::class);
     }
 }

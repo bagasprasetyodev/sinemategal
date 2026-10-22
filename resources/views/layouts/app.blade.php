@@ -34,33 +34,30 @@
             <nav>
                 <ul class="nav-links">
                     <li>
-                        <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
-                            Beranda
+                        <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-label="Home" title="Home">
+                            <svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg><span class="sidebar-nav-label">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('movies.index') }}" class="nav-link {{ request()->routeIs('movies.*') ? 'active' : '' }}">
-                            Sinema & Film
+                        <a href="{{ route('movies.index') }}" class="nav-link {{ request()->routeIs('movies.*') ? 'active' : '' }}" aria-label="Movies" title="Movies">
+                            <svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4m-4 6h4m10-6h4m-4 6h4"/></svg><span class="sidebar-nav-label">Movies</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('music.index') }}" class="nav-link {{ request()->routeIs('music.*') ? 'active' : '' }}">
-                            Nada Tradisi
+                        <a href="{{ route('music.index') }}" class="nav-link {{ request()->routeIs('music.*') ? 'active' : '' }}" aria-label="Music" title="Music">
+                            <svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span class="sidebar-nav-label">Music</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('subscriptions.index') }}" class="nav-link {{ request()->routeIs('subscriptions.*') ? 'active' : '' }}">
-                            Langganan VIP
+                        <a href="{{ route('subscriptions.index') }}" class="nav-link {{ request()->routeIs('subscriptions.*') ? 'active' : '' }}" aria-label="Discover" title="Discover">
+                            <svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 7l2 4-4 2 2-6z"/></svg><span class="sidebar-nav-label">Discover</span>
                         </a>
                     </li>
-                    @auth
                     <li>
-                        <a href="{{ route('tickets.mine') }}" class="nav-link {{ request()->routeIs('tickets.*') ? 'active' : '' }}">
-                            Tiket Saya
+                        <a href="{{ route('tickets.mine') }}" class="nav-link {{ request()->routeIs('tickets.*') ? 'active' : '' }}" aria-label="Library" title="Library">
+                            <svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20M8 7h8"/></svg><span class="sidebar-nav-label">Library</span>
                         </a>
                     </li>
-                    @endauth
-
                 </ul>
             </nav>
 
@@ -68,7 +65,8 @@
             <div class="nav-actions">
                 @auth
                     <!-- Dompet Bahari Pill -->
-                    <a href="{{ route('wallet.index') }}" class="user-wallet-badge" title="Saldo Dompet Bahari">
+                    <a href="{{ route('wallet.index') }}" class="user-wallet-badge" title="Saldo Dompet Bahari" aria-label="Saldo Dompet Bahari">
+                        <svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 9h18M16 15h2"/><path d="M6 5V3h12v2"/></svg>
                         <span style="color: var(--text-muted); font-size: 0.75rem;">Saldo:</span>
                         <span>Rp {{ number_format(Auth::user()->wallet_balance, 0, ',', '.') }}</span>
                     </a>
@@ -82,14 +80,14 @@
                         @endif
                         <form action="{{ route('logout') }}" method="POST" style="margin-left: 0.25rem;">
                             @csrf
-                            <button type="submit" class="btn btn-secondary btn-sm" style="padding: 0.15rem 0.45rem; font-size: 0.72rem;" title="Keluar">
-                                Keluar
+                            <button type="submit" class="btn btn-secondary btn-sm" style="padding: 0.15rem 0.45rem; font-size: 0.72rem;" title="Keluar" aria-label="Keluar">
+                                <svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></svg><span class="sidebar-nav-label">Keluar</span>
                             </button>
                         </form>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-secondary btn-sm">Masuk</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Daftar</a>
+                    <a href="{{ route('login') }}" class="btn btn-secondary btn-sm" aria-label="Masuk" title="Masuk"><svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5m5 5H3"/></svg><span class="sidebar-nav-label">Masuk</span></a>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-sm" aria-label="Daftar" title="Daftar"><svg class="sidebar-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M19 8v6m-3-3h6"/></svg><span class="sidebar-nav-label">Daftar</span></a>
                 @endauth
 
                 <!-- Mobile Hamburger Toggle Button -->
@@ -119,25 +117,25 @@
             <nav class="mobile-nav-links">
                 <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    <span>Beranda</span>
+                            <span>Home</span>
                 </a>
                 <a href="{{ route('movies.index') }}" class="mobile-nav-link {{ request()->routeIs('movies.*') ? 'active' : '' }}">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
-                    <span>Sinema & Film</span>
+                    <span>Movies</span>
                 </a>
                 <a href="{{ route('music.index') }}" class="mobile-nav-link {{ request()->routeIs('music.*') ? 'active' : '' }}">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-                    <span>Nada Tradisi</span>
+                    <span>Music</span>
                 </a>
                 <a href="{{ route('subscriptions.index') }}" class="mobile-nav-link {{ request()->routeIs('subscriptions.*') ? 'active' : '' }}">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                    <span>Langganan VIP</span>
+                    <span>Discover</span>
+                </a>
+                <a href="{{ route('tickets.mine') }}" class="mobile-nav-link {{ request()->routeIs('tickets.*') ? 'active' : '' }}">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"></path><path d="M8 8h8M8 12h8M8 16h5"></path></svg>
+                    <span>Library</span>
                 </a>
                 @auth
-                <a href="{{ route('tickets.mine') }}" class="mobile-nav-link {{ request()->routeIs('tickets.*') ? 'active' : '' }}">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
-                    <span>Tiket Saya</span>
-                </a>
                 <a href="{{ route('wallet.index') }}" class="mobile-nav-link {{ request()->routeIs('wallet.*') ? 'active' : '' }}">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                     <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
@@ -257,8 +255,8 @@
     </footer>
 
     <!-- Persistent Bottom Audio Player (Spotify / YouTube Music) -->
-    <div id="bottomPlayer" class="bottom-player">
-        <div class="player-inner">
+    <div id="bottomPlayer" class="bottom-player is-hidden" role="region" aria-label="Pemutar musik">
+        <div class="player-inner is-hidden">
             <!-- Left: Current Playing Info -->
             <div class="player-track-info">
                 <img id="playerThumb" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100" alt="Track Cover" class="player-thumb">
@@ -271,13 +269,13 @@
             <!-- Center: Controls & Timeline -->
             <div class="player-controls-wrap">
                 <div class="player-buttons">
-                    <button id="playerPrevBtn" class="player-ctrl-btn" title="Lagu Sebelumnya">
+                    <button type="button" id="playerPrevBtn" class="player-ctrl-btn" title="Lagu Sebelumnya" aria-label="Lagu sebelumnya">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line></svg>
                     </button>
-                    <button id="playerPlayBtn" class="player-play-btn" title="Putar/Jeda">
+                    <button type="button" id="playerPlayBtn" class="player-play-btn" title="Putar/Jeda" aria-label="Putar atau jeda">
                         <span id="playerPlayIcon">&#9654;</span>
                     </button>
-                    <button id="playerNextBtn" class="player-ctrl-btn" title="Lagu Berikutnya">
+                    <button type="button" id="playerNextBtn" class="player-ctrl-btn" title="Lagu Berikutnya" aria-label="Lagu berikutnya">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line></svg>
                     </button>
                 </div>
@@ -292,6 +290,9 @@
 
             <!-- Right: Extra Actions & Volume -->
             <div class="player-extras">
+                <button type="button" id="playlistToggleBtn" class="btn btn-secondary btn-sm playlist-toggle-btn" aria-expanded="false" aria-controls="rightPlaylistPanel">
+                    Koleksi Musik
+                </button>
                 <button id="lyricsToggleBtn" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 0.25rem 0.65rem;">
                     Lirik
                 </button>
@@ -301,6 +302,86 @@
                 </div>
             </div>
         </div>
+        <div id="youtubePlayerContainer" class="youtube-player-container" hidden>
+            <iframe id="youtubePlayerFrame" title="Pemutar musik eksternal" allow="autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <section id="rightPlaylistPanel" class="right-playlist-panel" aria-label="Koleksi musik">
+          <section class="right-playlist-collection" aria-labelledby="tembangDolananTitle">
+            <div class="right-playlist-heading">
+                <div>
+                    <span class="right-playlist-eyebrow">KOLEKSI LAGU ANAK</span>
+                    <h2 id="tembangDolananTitle">Tembang Dolanan</h2>
+                    <p>Lagu Anak Tradisional</p>
+                </div>
+                @if($tembangDolananPlaylist)
+                    <button type="button" class="playlist-play-all" onclick="window.playPlaylist({{ $tembangDolananPlaylist->id }})" aria-label="Putar semua Tembang Dolanan">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    </button>
+                @endif
+            </div>
+
+            @if($tembangDolananPlaylist && $tembangDolananPlaylist->tracks->isNotEmpty())
+                <ol class="right-playlist-tracks">
+                    @foreach($tembangDolananPlaylist->tracks as $index => $track)
+                        <li>
+                            <button type="button" class="tembang-dolanan-track" data-track-id="{{ $track->id }}" onclick="window.playTrackById({{ $track->id }})">
+                                <span class="playlist-track-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="playlist-track-copy">
+                                    <span class="playlist-track-title">{{ $track->title }}</span>
+                                    <span class="playlist-track-artist">{{ $track->artist }}</span>
+                                </span>
+                                <span class="playlist-track-duration">{{ $track->duration_string }}</span>
+                            </button>
+                        </li>
+                    @endforeach
+                </ol>
+                <p class="playlist-attribution">
+                    Audio: <a href="https://commons.wikimedia.org/wiki/File:Gundul-Gundul_Pacul.ogg" target="_blank" rel="noopener">Putri Sari Wahyuningsih &amp; Sekar Kinanthi</a>,
+                    <a href="https://commons.wikimedia.org/wiki/File:Gending_Lir-Ilir.ogg" target="_blank" rel="noopener">Dewinta Sanggar Seni Laras Siwi</a>, dan
+                    <a href="https://commons.wikimedia.org/wiki/File:Cublak-Cublak_Suweng.ogg" target="_blank" rel="noopener">Kinanthi Nugroho &amp; Fandy Aprianto Rohman</a> (CC BY-SA 4.0). Suwe Ora Jamu dan Menthok-Menthok memakai audio demo sementara.
+                </p>
+            @else
+                <p class="playlist-empty">Koleksi lagu akan tampil setelah data playlist dimuat.</p>
+            @endif
+          </section>
+
+          <section class="right-playlist-collection" aria-labelledby="musikJawaTitle">
+            <div class="right-playlist-heading">
+                <div>
+                    <span class="right-playlist-eyebrow">PILIHAN LAGU JAWA</span>
+                    <h2 id="musikJawaTitle">Musik Jawa</h2>
+                    <p>Tembang klasik &amp; populer</p>
+                </div>
+                @if($musikJawaPlaylist)
+                    <button type="button" class="playlist-play-all" onclick="window.playPlaylist({{ $musikJawaPlaylist->id }})" aria-label="Putar semua Musik Jawa">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    </button>
+                @endif
+            </div>
+
+            @if($musikJawaPlaylist && $musikJawaPlaylist->tracks->isNotEmpty())
+                <ol class="right-playlist-tracks">
+                    @foreach($musikJawaPlaylist->tracks as $index => $track)
+                        <li>
+                            <button type="button" class="musik-jawa-track" data-track-id="{{ $track->id }}" onclick="window.playTrackById({{ $track->id }})">
+                                <span class="playlist-track-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="playlist-track-copy">
+                                    <span class="playlist-track-title">{{ $track->title }}</span>
+                                    <span class="playlist-track-artist">{{ $track->artist }}</span>
+                                </span>
+                                <span class="playlist-track-duration">{{ $track->duration_string }}</span>
+                            </button>
+                        </li>
+                    @endforeach
+                </ol>
+                <p class="playlist-attribution">
+                    Semua lagu memakai berkas MP3 lokal yang disediakan pengguna.
+                </p>
+            @else
+                <p class="playlist-empty">Koleksi Musik Jawa akan tampil setelah data playlist dimuat.</p>
+            @endif
+          </section>
+        </section>
     </div>
 
     <!-- Lyrics Drawer (Ngapak & Terjemahan) -->

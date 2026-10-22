@@ -3,7 +3,7 @@
 @section('title', 'Beranda - Sinema Tegal Streaming & Nada Tegalan')
 
 @section('content')
-<div class="container">
+<div class="container home-dashboard">
     <!-- Hero Banner (Cinematic Visual Marquee) -->
     @if($featuredMovie)
     <section class="hero-banner" style="background-image: url('{{ $featuredMovie->banner_url }}');">
@@ -67,6 +67,22 @@
         </div>
     </section>
     @endif
+
+    <section class="home-category-strip" aria-label="Jelajahi kategori film">
+        <div class="home-category-heading">
+            <span class="eyebrow">PILIHAN BUATMU</span>
+            <h2>Jelajahi Kategori</h2>
+        </div>
+        <div class="home-category-links">
+            <a href="{{ route('movies.index') }}" class="home-category-chip is-active">Semua</a>
+            @foreach($categories as $category)
+                <a href="{{ route('movies.index', ['category' => $category->slug]) }}" class="home-category-chip">
+                    {{ $category->name }}
+                </a>
+            @endforeach
+            <a href="{{ route('music.index') }}" class="home-category-chip">Musik</a>
+        </div>
+    </section>
 
     <!-- Highlight Stats Bar (Visual Icons) -->
     <div class="stats-grid">

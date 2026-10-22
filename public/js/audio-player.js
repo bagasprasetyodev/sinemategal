@@ -14,6 +14,9 @@
 
   // DOM Elements
   const bottomPlayer = document.getElementById('bottomPlayer');
+  const playerInner = bottomPlayer?.querySelector('.player-inner');
+  const youtubePlayerContainer = document.getElementById('youtubePlayerContainer');
+  const youtubePlayerFrame = document.getElementById('youtubePlayerFrame');
   const playBtn = document.getElementById('playerPlayBtn');
   const playIcon = document.getElementById('playerPlayIcon');
   const prevBtn = document.getElementById('playerPrevBtn');
@@ -30,6 +33,7 @@
   const lyricsContent = document.getElementById('lyricsContent');
   const lyricsTitle = document.getElementById('lyricsTitle');
   const lyricsToggleBtn = document.getElementById('lyricsToggleBtn');
+  const playlistToggleBtn = document.getElementById('playlistToggleBtn');
   const paywallModal = document.getElementById('paywallModal');
 
   // Format MM:SS
@@ -40,6 +44,79 @@
     return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
+  function playExternalMediaEmbed(url) {
+    if (!youtubePlayerContainer || !youtubePlayerFrame) return false;
+    let embedUrl;
+    try {
+      embedUrl = new URL(url);
+    } catch (error) {
+      return false;
+    }
+    const isYoutube = embedUrl.hostname === 'www.youtube.com' && /^\/embed\/[\w-]+$/.test(embedUrl.pathname);
+    const isSpotify = embedUrl.hostname === 'open.spotify.com' && /^\/embed\/track\/[\w]+$/.test(embedUrl.pathname);
+    const isAppleMusic = embedUrl.hostname === 'embed.music.apple.com' && /^\/[^/]+\/song\/[\w-]+\/\d+$/.test(embedUrl.pathname);
+    if (!isYoutube && !isSpotify && !isAppleMusic) return false;
+    if (isYoutube) {
+      embedUrl.searchParams.set('autoplay', '1');
+      embedUrl.searchParams.set('playsinline', '1');
+    }
+    youtubePlayerFrame.src = embedUrl.toString();
+    youtubePlayerContainer.hidden = false;
+    if (playerInner) playerInner.classList.add('is-hidden');
+    return true;
+  }
+
+  function stopYoutubeEmbed() {
+    if (!youtubePlayerContainer || !youtubePlayerFrame) return;
+    youtubePlayerFrame.src = '';
+    youtubePlayerContainer.hidden = true;
+    if (playerInner) playerInner.classList.remove('is-hidden');
+  }
+
+  function syncQueueForTrack(trackId) {
+    const targetId = Number(trackId);
+    let index = playlistQueue.findIndex(track => Number(track.id) === targetId);
+
+    if (index === -1) {
+      const dolananTracks = Array.from(document.querySelectorAll('.tembang-dolanan-track[data-track-id]'))
+        .map(button => ({ id: Number(button.dataset.trackId) }))
+        .filter(track => Number.isFinite(track.id));
+      const dolananIndex = dolananTracks.findIndex(track => track.id === targetId);
+      if (dolananIndex !== -1) {
+        playlistQueue = dolananTracks;
+        index = dolananIndex;
+      }
+    }
+
+    if (index === -1) {
+      const jawaTracks = Array.from(document.querySelectorAll('.musik-jawa-track[data-track-id]'))
+        .map(button => ({ id: Number(button.dataset.trackId) }))
+        .filter(track => Number.isFinite(track.id));
+      const jawaIndex = jawaTracks.findIndex(track => track.id === targetId);
+      if (jawaIndex !== -1) {
+        playlistQueue = jawaTracks;
+        index = jawaIndex;
+      }
+    }
+
+    if (index === -1) {
+      const visibleTracks = Array.from(document.querySelectorAll('.track-card[data-track-id]'))
+        .map(card => ({ id: Number(card.dataset.trackId) }))
+        .filter(track => Number.isFinite(track.id));
+      if (visibleTracks.length) {
+        playlistQueue = visibleTracks;
+        index = playlistQueue.findIndex(track => track.id === targetId);
+      }
+    }
+
+    if (index === -1) {
+      playlistQueue = [{ id: targetId }];
+      index = 0;
+    }
+
+    currentTrackIndex = index;
+  }
+
   // Restore state from LocalStorage on page load
   function restoreState() {
     try {
@@ -47,9 +124,12 @@
       if (saved) {
         const state = JSON.parse(saved);
         if (state.track) {
+          syncQueueForTrack(state.track.id);
           setTrackUI(state.track);
-          audio.src = state.track.audio_url;
-          audio.currentTime = state.currentTime || 0;
+          if (!playExternalMediaEmbed(state.track.audio_url)) {
+            audio.src = state.track.audio_url;
+            audio.currentTime = state.currentTime || 0;
+          }
           if (state.volume !== undefined) {
             audio.volume = state.volume;
             if (volumeSlider) volumeSlider.value = state.volume * 100;
@@ -80,6 +160,7 @@
   function setTrackUI(track) {
     currentTrackData = track;
     if (bottomPlayer) bottomPlayer.classList.remove('is-hidden');
+    if (playerInner) playerInner.classList.remove('is-hidden');
     if (thumbImg) thumbImg.src = track.cover_url || '/images/default-track.jpg';
     if (titleEl) titleEl.textContent = track.title;
     if (artistEl) artistEl.textContent = track.artist + (track.album ? ` • ${track.album}` : '');
@@ -89,7 +170,7 @@
     }
 
     // Highlight track card in current DOM if any
-    document.querySelectorAll('.track-card').forEach(el => {
+    document.querySelectorAll('.track-card, .tembang-dolanan-track, .musik-jawa-track').forEach(el => {
       if (el.dataset.trackId == track.id) {
         el.classList.add('is-playing');
       } else {
@@ -122,6 +203,7 @@
   // Play a specific track via ID
   window.playTrackById = async function (trackId) {
     try {
+      syncQueueForTrack(trackId);
       const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
       const response = await fetch(`/api/tracks/${trackId}/play`, {
         method: 'POST',
@@ -147,6 +229,15 @@
       }
 
       setTrackUI(data.track);
+      if (playExternalMediaEmbed(data.track.audio_url)) {
+        audio.pause();
+        audio.removeAttribute('src');
+        audio.load();
+        updatePlayIcon(false);
+        saveState(false);
+        return;
+      }
+      stopYoutubeEmbed();
       audio.src = data.track.audio_url;
       audio.load();
       await audio.play();
@@ -166,6 +257,8 @@
       if (data.tracks && data.tracks.length > 0) {
         playlistQueue = data.tracks;
         currentTrackIndex = 0;
+        if (bottomPlayer) bottomPlayer.classList.remove('playlist-is-open');
+        if (playlistToggleBtn) playlistToggleBtn.setAttribute('aria-expanded', 'false');
         window.playTrackById(playlistQueue[0].id);
       }
     } catch (e) {
@@ -221,8 +314,8 @@
     prevBtn.addEventListener('click', () => {
       if (audio.currentTime > 3) {
         audio.currentTime = 0;
-      } else if (playlistQueue.length > 0 && currentTrackIndex > 0) {
-        currentTrackIndex--;
+      } else if (playlistQueue.length > 0) {
+        currentTrackIndex = (currentTrackIndex - 1 + playlistQueue.length) % playlistQueue.length;
         window.playTrackById(playlistQueue[currentTrackIndex].id);
       }
     });
@@ -230,11 +323,9 @@
 
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-      if (playlistQueue.length > 0 && currentTrackIndex < playlistQueue.length - 1) {
-        currentTrackIndex++;
+      if (playlistQueue.length > 0) {
+        currentTrackIndex = (currentTrackIndex + 1) % playlistQueue.length;
         window.playTrackById(playlistQueue[currentTrackIndex].id);
-      } else {
-        audio.currentTime = 0;
       }
     });
   }
@@ -262,6 +353,13 @@
   if (lyricsToggleBtn && lyricsDrawer) {
     lyricsToggleBtn.addEventListener('click', () => {
       lyricsDrawer.classList.toggle('is-open');
+    });
+  }
+
+  if (playlistToggleBtn && bottomPlayer) {
+    playlistToggleBtn.addEventListener('click', () => {
+      const isOpen = bottomPlayer.classList.toggle('playlist-is-open');
+      playlistToggleBtn.setAttribute('aria-expanded', String(isOpen));
     });
   }
 
